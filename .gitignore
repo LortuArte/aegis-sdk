@@ -1,0 +1,14 @@
+# Entornos virtuales
+env/
+venv/
+ven/
+
+# Archivos de caché y compilación de Python
+__pycache__/
+*.pyc
+build/
+dist/
+*.egg-info/
+
+# Variables de entorno (Secretos)
+.env
