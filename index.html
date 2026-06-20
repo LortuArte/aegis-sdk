@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AEGIS SDK | AI Agent Security</title>
+    <title>AEGIS Core | AI Agent Security</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -18,6 +18,7 @@
                     },
                     fontFamily: {
                         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", 'monospace'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
                     }
                 }
             }
@@ -30,22 +31,22 @@
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
     </style>
 </head>
-<body class="font-mono antialiased min-h-screen flex flex-col selection:bg-aegis-green selection:text-black">
+<body class="font-sans antialiased min-h-screen flex flex-col selection:bg-aegis-green selection:text-black">
 
     <!-- Navbar -->
     <nav class="w-full border-b border-gray-800 bg-black/50 backdrop-blur-md fixed top-0 z-50">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <span class="text-aegis-green font-bold text-xl tracking-wider glitch-text">AEGIS SDK</span>
-                <span class="text-gray-500 text-xs px-2 py-0.5 border border-gray-700 rounded-full">v5.3.3</span>
+            <div class="flex items-center space-x-2 font-mono">
+                <span class="text-aegis-green font-bold text-xl tracking-wider glitch-text">AEGIS Core</span>
+                <span class="text-gray-500 text-xs px-2 py-0.5 border border-gray-700 rounded-full">v3.0.0</span>
             </div>
-            <div class="flex items-center space-x-6 text-sm">
+            <div class="flex items-center space-x-6 text-sm font-mono">
                 <div class="hidden md:flex items-center text-gray-400">
                     <span class="w-2 h-2 rounded-full bg-aegis-green mr-2 blinking-dot"></span>
-                    Engine Status: <span class="text-aegis-green ml-1">ONLINE</span>
+                    Status: <span class="text-aegis-green ml-1">ONLINE</span>
                 </div>
                 <div class="hidden md:block text-gray-400">
-                    HFT Latency: <span class="text-aegis-green">0.005ms</span>
+                    Latency: <span class="text-aegis-green">&lt; 1ms</span>
                 </div>
             </div>
         </div>
@@ -55,78 +56,77 @@
     <main class="flex-grow flex flex-col items-center justify-center pt-32 pb-16 px-4">
         <div class="max-w-4xl w-full text-center space-y-8">
             
-            <div class="inline-flex items-center space-x-2 bg-aegis-gray border border-gray-800 rounded-full px-4 py-1.5 text-sm text-gray-300">
+            <div class="inline-flex items-center space-x-2 bg-aegis-gray border border-gray-800 rounded-full px-4 py-1.5 text-sm text-gray-300 font-mono">
                 <span class="text-red-500">🚨</span>
-                <span>Stop Agentic Double-Spends & API Budget Draining</span>
+                <span>AI Agents + Payments = Financial Risk</span>
             </div>
 
-            <h1 class="text-5xl md:text-6xl font-bold tracking-tight text-white">
-                The L3 Policy Gate for <br>
-                <span class="text-aegis-green glitch-text">Autonomous AI</span>
+            <h1 class="text-5xl md:text-6xl font-bold tracking-tight text-white leading-tight">
+                Prevent Overspending in AI Agents in <span class="text-aegis-green glitch-text font-mono">< 5 Minutes</span>
             </h1>
 
             <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Traditional cloud gateways are too slow to stop async loops. AEGIS applies pure-memory ACID locks locally in <span class="text-white font-bold">0.005ms</span>, terminating rogue agents before the request hits the network.
+                Cloud gateways are too slow to intercept async agent loops. AEGIS applies pure-memory ACID locks locally in <span class="text-white font-bold">&lt; 1ms</span>, killing rogue transactions before they drain your Stripe or API budget.
             </p>
 
-            <div class="max-w-lg mx-auto bg-black border border-gray-800 rounded-lg p-4 text-left flex items-center justify-between group cursor-pointer hover:border-aegis-green transition-colors" onclick="copyCode()">
-                <code class="text-gray-300"><span class="text-pink-500">pip</span> install aegis-sdk-salesforce</code>
+            <div class="max-w-lg mx-auto bg-black border border-gray-800 rounded-lg p-4 text-left flex items-center justify-between group cursor-pointer hover:border-aegis-green transition-colors font-mono" onclick="copyCode()">
+                <code class="text-gray-300"><span class="text-pink-500">pip</span> install aegis-core-sdk</code>
                 <svg class="w-5 h-5 text-gray-600 group-hover:text-aegis-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
             </div>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+            <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 pt-4 font-mono">
                 <a href="/docs" class="w-full sm:w-auto px-8 py-3 bg-aegis-green text-black font-bold rounded hover:bg-green-400 transition-colors text-center">
-                    OPEN API DOCS
+                    ENTERPRISE DEMO
                 </a>
                 <a href="https://github.com/LortuArte/aegis-sdk-python" target="_blank" class="w-full sm:w-auto px-8 py-3 bg-aegis-gray border border-gray-700 text-white font-bold rounded hover:bg-gray-800 transition-colors text-center">
-                    VIEW SOURCE ON GITHUB
+                    VIEW ON GITHUB
                 </a>
             </div>
 
         </div>
 
-        <!-- Terminal / Video Section -->
+        <!-- Video Section (El Nuevo Flow) -->
         <div class="max-w-5xl w-full mt-24">
-            <div class="flex items-center px-4 py-2 bg-gray-900 border border-gray-800 border-b-0 rounded-t-lg">
+            <div class="flex items-center px-4 py-2 bg-gray-900 border border-gray-800 border-b-0 rounded-t-lg font-mono">
                 <div class="flex space-x-2">
                     <div class="w-3 h-3 rounded-full bg-red-500"></div>
                     <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                     <div class="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
-                <div class="mx-auto text-xs text-gray-500 font-sans">aegis-node@production:~</div>
+                <div class="mx-auto text-xs text-gray-500">aegis-core-sdk@production:~</div>
             </div>
             
-            <!-- Contenedor del video activado (Reemplazado por YouTube) -->
             <div class="bg-black border border-gray-800 rounded-b-lg p-0 font-mono text-sm shadow-2xl overflow-hidden relative min-h-[400px] md:min-h-[500px] w-full">
-                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/3M-yHMgA2Wk?autoplay=1&mute=1&loop=1&playlist=3M-yHMgA2Wk&controls=0" frameborder="0" allowfullscreen></iframe>
+                <!-- REEMPLAZA EL ID DE YOUTUBE CUANDO GRABES EL NUEVO VÍDEO -->
+                <iframe class="absolute inset-0 w-full h-full" src="https://youtu.be/3M-yHMgA2Wk" frameborder="0" allowfullscreen loading="lazy"></iframe>
             </div>
         </div>
     
         <!-- Features Section -->
         <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-3 gap-8 mt-24 text-left border-t border-gray-800 pt-16">
             <div>
-                <h3 class="text-white font-bold mb-2 text-lg">In-Memory Execution</h3>
-                <p class="text-gray-400 text-sm">Bypasses slow network hops. AEGIS sits directly in your agent's runtime environment.</p>
+                <h3 class="text-white font-bold mb-2 text-lg">Sub-Millisecond Execution</h3>
+                <p class="text-gray-400 text-sm">Bypasses slow network hops. AEGIS sits directly in your agent's runtime environment, resolving in &lt; 1ms.</p>
             </div>
             <div>
-                <h3 class="text-white font-bold mb-2 text-lg">ACID Local Locks</h3>
-                <p class="text-gray-400 text-sm">Thread-safe concurrent transaction blocking guarantees zero double-spending drift.</p>
+                <h3 class="text-white font-bold mb-2 text-lg">Horizontal Integration</h3>
+                <p class="text-gray-400 text-sm">Protect any execution tool. From Stripe fiat charges to Coinbase Web3 transactions, without vendor lock-in.</p>
             </div>
             <div>
-                <h3 class="text-white font-bold mb-2 text-lg">x402 Protocol Ready</h3>
-                <p class="text-gray-400 text-sm">Built for the future of Machine-to-Machine (M2M) financial compliance and settlement.</p>
+                <h3 class="text-white font-bold mb-2 text-lg">Zero-Redis Architecture</h3>
+                <p class="text-gray-400 text-sm">Drop-in Python installation. Local ACID locks guarantee zero double-spending drift out of the box.</p>
             </div>
         </div>
 
     </main>
 
-    <footer class="w-full border-t border-gray-800 py-8 text-center text-xs text-gray-600 mt-16">
-        <p>AEGIS SDK &copy; 2026. Architected by Lortu.</p>
+    <footer class="w-full border-t border-gray-800 py-8 text-center text-xs text-gray-600 mt-16 font-mono">
+        <p>AEGIS Core &copy; 2026. Built for the Agent Economy.</p>
     </footer>
 
     <script>
         function copyCode() {
-            navigator.clipboard.writeText('pip install aegis-sdk-salesforce');
+            navigator.clipboard.writeText('pip install aegis-core-sdk');
             const container = document.querySelector('.bg-black.border');
             container.classList.add('bg-gray-800');
             setTimeout(() => container.classList.remove('bg-gray-800'), 200);
