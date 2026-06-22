@@ -1,14 +1,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="aegis-core-sdk",
-    version="3.1.0", # Saltamos a la v3.1 por marketing (parece más maduro)
+    name="aegis-core-lortuarte-sdk",
+    version="3.1.0", 
     author="LortuArte",
-    author_email="hello@aegiscore.dev", # Cambia esto si quieres
+    author_email="hello@aegiscore.dev",
     description="Sub-millisecond Tool-Execution Firewall to prevent AI Agent Double-Spending.",
-    long_description=open("README.md").read(),
+    long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/TuUsuario/aegis-core", # ACTUALIZA CON TU LINK REAL
+    url="https://github.com/LortuArte/aegis-sdk", 
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -21,5 +21,5 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.8',
-    install_requires=[], # Mantenlo ligero, 0 dependencias es tu fuerte
+    install_requires=[], 
 )
