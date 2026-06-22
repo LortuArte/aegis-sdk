@@ -2,13 +2,32 @@
 env/
 venv/
 ven/
+.venv/
 
 # Archivos de caché y compilación de Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 build/
 dist/
 *.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
 
 # Variables de entorno (Secretos)
 .env
+.env.*
+*.pem
+
+# Bases de datos locales
+*.sqlite3
+*.db
+
+# Archivos de Sistema Operativo (Basura visual)
+.DS_Store
+Thumbs.db
+
+# Logs y simulaciones
+*.log
