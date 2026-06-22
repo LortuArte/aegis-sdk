@@ -22,7 +22,7 @@ AEGIS is a horizontal **L3 Policy Gate** designed purely for speed and state loc
 ## 📦 Quickstart & Installation
 
 ```bash
-pip install aegis-core-sdk
+pip install aegis-core-lortuarte-sdk
 ```
 
 ## 🛠️ Proof of Concept: The 3-Line Integration
