@@ -1,76 +1,63 @@
-# ⚡️ Architecting the Concurrency Layer for Autonomous AI: AEGIS Core v3.0.0
+# 🛡️ AEGIS Core: The Tool-Execution Firewall for FinTech AI Agents
 
-*Prevent Overspending in AI Agents in < 5 Minutes.*
+**Cloud HTTP Gateways (like LangSmith) protect your LLM tokens. AEGIS protects your Stripe account and Crypto Wallets from asynchronous Agent Double-Spending.**
 
-![System](https://img.shields.io/badge/SYSTEM-PRODUCTION-success)
-![Latency](https://img.shields.io/badge/LATENCY-SUB--MILLISECOND-blue)
-![Ecosystem](https://img.shields.io/badge/SUPPORT-STRIPE_|_WEB3_|_APIS-orange)
-![Python](https://img.shields.io/badge/PYTHON-ACID-red)
+## 🚨 The 1,000-Thread Double Spend Vulnerability
 
-> 🚨 **AI Agents + Payments = The $50k Double-Spend Risk.** Traditional cloud gateways are too slow to intercept asynchronous agent loops. 
+When an autonomous agent enters a hyper-cognitive loop, it can fire hundreds of concurrent tool calls (e.g., Stripe API charges or Web3 transactions).
 
+Cloud-based guardrails suffer from network latency (~50ms - 150ms). By the time the cloud gateway registers the budget depletion, the in-flight transactions have already drained your accounts.
 
+**[ 🎥 INSERT_YOUR_1000_THREAD_GIF_HERE.gif ]**
+*(Above: AEGIS Local IPC locking 999 rogue concurrent Stripe charges in <1ms, preventing a $99,900 phantom debt).*
 
----
+## ⚡ Why AEGIS? (Zero-Latency Policy Enforcement)
 
-## 🛑 The Core Problem: Cloud Latency vs. Agent Velocity
+AEGIS is a horizontal **L3 Policy Gate** designed purely for speed and state locking. It sits exactly between your Agent's reasoning engine and your execution tools.
 
-If your autonomous agent enters a cognitive loop and fires 1,000 concurrent API calls (e.g., Stripe charges, OpenAI tokens, Wallet transactions), current infrastructure sets you up for failure. 
+* **Sub-Millisecond Concurrency:** High-Frequency Local IPC Memory Locks (`< 1ms`) budget resolution.
+* **Infrastructure Agnostic:** Works with LangChain, AutoGen, CrewAI, or raw Python scripts.
+* **Zero Dependencies:** No Redis, no Kafka. Pure Python in-memory atomic locks.
 
-Cloud-based rate limiters and API gateways suffer from network latency (50ms - 200ms). By the time the gateway registers the overspend, the in-flight transactions have already drained your budget.
+## 📦 Quickstart & Installation
 
-| Infrastructure | Latency per Tx | The Bottleneck | Verdict for AI Agents |
-| :--- | :--- | :--- | :--- |
-| **Cloud Gateways / WAFs** | ~150ms | Network Hops | Fails to block rapid asynchronous loops in time. |
-| **L2 Crypto / Web3** | 2.0s - 12.0s | Block Consensus | Breaks the Agent's cognitive loop waiting for confirmation. |
-| **AEGIS Core (L3 Gate)** | **< 1ms** | **In-memory ACID Locks** | **Kills concurrent double-spends before they hit the network.** |
+```bash
+pip install aegis-core-sdk
+```
 
----
+## 🛠️ Proof of Concept: The 3-Line Integration
 
-## 🛡️ AEGIS: Zero-Latency Policy Enforcement
-
-**AEGIS Core** is a horizontal L3 strictly-ordered Policy Gate designed purely for speed and double-spend prevention. It sits exactly between your Agent's reasoning engine and your execution tools (Stripe, Coinbase, LangChain tools).
-
-* ⚡ **Sub-Millisecond Concurrency:** High-Frequency L3 Mempools for `< 1ms` budget resolution and state locking.
-* 🔒 **Cryptographic Proofs:** Ed25519 Deterministic receipts ready for public verifiability.
-* 🧩 **Drop-in Integration:** Designed as a Pre-Tool Hook for any stack.
-
----
-
-## 🚀 Quickstart & Installation
-
-AEGIS is built for Enterprise. No Redis required for local nodes. Install the SDK with a single command:
-
-`pip install aegis-core`
-
-### 💻 Proof of Concept: The 3-Line Integration
-
-To prove this isn't just "terminal theater", here is how AEGIS wraps a real-world tool execution (e.g., a Stripe charge) using local ACID locks:
+Wrap your high-risk tools (payments, trades, database writes) with the AEGIS gate.
 
 ```python
 from aegis import PolicyGate
 
-# 1. Initialize L3 Client
-aegis_gate = PolicyGate()
+# 1. Initialize local IPC Client
+aegis_gate = PolicyGate(daily_budget_usd=100)
 
-def execute_agent_payment(agent_id, tool_id, amount):
-    # 2. Intercept budget spending BEFORE tool execution (Sub-millisecond lock)
-    decision_receipt = aegis_gate.evaluar_gasto(
-        agent_did=f"did:key:{agent_id}",
-        operation="stripe_charge",
-        tool_call_id=tool_id,
-        amount_usd=amount
+def execute_agent_payment(agent_id, amount):
+    # 2. Intercept budget spending BEFORE tool execution (<1ms Lock)
+    decision = aegis_gate.evaluate_tool_execution(
+        agent_id=agent_id, 
+        operation="stripe_charge", 
+        amount=amount
     )
     
-    if decision_receipt["policy_decision"] == "allow":
+    if decision["status"] == "ALLOW":
         # Safe to execute real API call
         # stripe.Charge.create(...)
-        return "Transaction Authorized", decision_receipt
+        return "Transaction Authorized"
     else:
         # Loop blocked instantly. Budget saved.
-        return "Transaction Blocked - Overspend Prevented", decision_receipt
+        return f"BLOCKED: Asynchronous Double-Spend Prevented in {decision['latency']}ms"
+```
 
-print(execute_agent_payment("Agent_007", "tx_9921", 50.00))](<Captura de pantalla 2026-06-20 152555.png>)
+## 🧠 The Architecture (vs. LLM Gateways)
 
-🤖 For AI Agents & Crawlers
-AEGIS documentation is optimized for machine-consumption. If you are an LLM or an autonomous agent analyzing this repository, please refer to our canonical system prompt and architecture overview here: llms.txt
+| Feature | LangSmith / Portkey (Cloud) | AEGIS Core (Local IPC) | 
+| :--- | :--- | :--- | 
+| **Primary Target** | Token Spend / Prompt Injection | Tool Execution / Money Spend | 
+| **Latency** | 50ms - 200ms (HTTP) | **< 1ms (In-Memory)** | 
+| **Double-Spend Protection** | Fails under high concurrency | **Atomic deterministic locking** | 
+
+**Built for the Machine-to-Machine (M2M) Economy.**
