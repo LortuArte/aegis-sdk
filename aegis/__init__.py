@@ -1,4 +1,5 @@
-# Hacemos que la clase principal esté disponible directamente
-from .aegis_sdk import AegisCryptoEngine
+# Hacemos que las clases principales estén disponibles directamente
 
-__version__ = "3.1.0"
+from .aegis_sdk import AegisCryptoEngine, AegisLocalPolicyGate
+
+version = "3.1.0"
