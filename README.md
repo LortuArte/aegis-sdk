@@ -868,7 +868,7 @@ Current focused evidence:
 │ DENY → tool not executed               PASS  │
 │ Decimal boundary handling              PASS  │
 │ Financial-loss matrix            12/12 PASS  │
-│ 1,000-way double-spend                 PASS  │
+│ 1,000-request double-spend             PASS  │
 │ L3 settlement matrix               7/7 PASS  │
 └───────────────────────────────────────────────┘
 ```
@@ -927,7 +927,7 @@ Financial-loss adversarial matrix:
 python test_financial_loss_matrix.py
 ```
 
-1,000-way double-spend test:
+1,000-request double-spend test:
 
 ```bash
 python test_double_spend_1000.py
