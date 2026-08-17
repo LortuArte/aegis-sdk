@@ -7,7 +7,7 @@
 AEGIS is a security and economic-control layer for high-risk AI-agent tool calls — combining atomic budget enforcement, replay-safe authorization, deterministic receipts, SHA-256 action references, Ed25519 signatures, and an isolated atomic L3 settlement layer.
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
-[![Version](https://img.shields.io/badge/version-3.2.0-blue)](https://pypi.org/project/aegis-core-lortuarte-sdk/)
+[![Version](https://img.shields.io/badge/version-3.3.0-blue)](https://pypi.org/project/aegis-core-lortuarte-sdk/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Status](https://img.shields.io/badge/status-Beta-orange)](#current-scope--limitations)
 [![Security](https://img.shields.io/badge/security-adversarially_tested-success)](#security-evidence)
@@ -76,7 +76,7 @@ AEGIS moves the authorization boundary directly in front of tool execution.
 
 # ⚡ What AEGIS Does
 
-AEGIS Core 3.2.0 focuses on the economic and authorization boundary between an autonomous agent and a high-risk external action.
+AEGIS Core 3.3.0 focuses on the economic and authorization boundary between an autonomous agent and a high-risk external action.
 
 ### 🔒 Atomic Budget Enforcement
 
@@ -124,6 +124,13 @@ An explicitly configured invalid Ed25519 private key aborts startup rather than 
 ### 💰 Decimal Monetary Accounting
 
 Economic state uses Python `Decimal` rather than binary floating-point arithmetic.
+
+AEGIS Core 3.3.0 supports monetary amounts with up to 6 decimal places.
+
+- Minimum supported positive amount: `$0.000001`
+- `$0.001` micropayments are supported
+- Amounts with more than 6 decimal places fail closed
+- L3 settlement stores value as integer monetary units at a scale of `1,000,000` units per USD
 
 ### 🏦 Atomic L3 Settlement
 
@@ -1059,7 +1066,7 @@ The isolated L3 layer performs transactional buyer → seller mutation and recor
 
 # ⚠️ Current Scope & Limitations
 
-**AEGIS Core 3.2.0 is Beta software.**
+**AEGIS Core 3.3.0 is Beta software.**
 
 ## Current tested scope
 
@@ -1217,7 +1224,7 @@ DEMO-READY
 | | |
 |:---|:---|
 | **Distribution** | `aegis-core-lortuarte-sdk` |
-| **Version** | `3.2.0` |
+| **Version** | `3.3.0` |
 | **Python** | `>=3.8` |
 | **Status** | Beta |
 | **License** | MIT |
