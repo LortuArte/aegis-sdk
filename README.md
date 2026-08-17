@@ -7,11 +7,11 @@
 AEGIS is a security and economic-control layer for high-risk AI-agent tool calls — combining atomic budget enforcement, replay-safe authorization, deterministic receipts, SHA-256 action references, Ed25519 signatures, and an isolated atomic L3 settlement layer.
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
-[![Version](https://img.shields.io/badge/version-3.1.0-blue)](https://pypi.org/project/aegis-core-lortuarte-sdk/)
+[![Version](https://img.shields.io/badge/version-3.2.0-blue)](https://pypi.org/project/aegis-core-lortuarte-sdk/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Status](https://img.shields.io/badge/status-Beta-orange)](#️-current-scope--limitations)
-[![Security](https://img.shields.io/badge/security-adversarially_tested-success)](#-security-evidence)
-[![L3](https://img.shields.io/badge/L3-7%2F7_PASS-success)](#️-atomic-l3-settlement)
+[![Status](https://img.shields.io/badge/status-Beta-orange)](#current-scope--limitations)
+[![Security](https://img.shields.io/badge/security-adversarially_tested-success)](#security-evidence)
+[![L3](https://img.shields.io/badge/L3-7%2F7_PASS-success)](#atomic-l3-settlement)
 
 ```bash
 pip install aegis-core-lortuarte-sdk
@@ -29,14 +29,14 @@ A policy decision made too far away from execution can leave room for:
                  AI AGENT
                     │
                     ▼
-               TOOL INTENT
+                TOOL INTENT
                     │
-          ┌─────────┼─────────┐
-          │         │         │
-          ▼         ▼         ▼
-       CALL #1   CALL #2   CALL #N
-          │         │         │
-          └─────────┼─────────┘
+           ┌────────┼────────┐
+           │        │        │
+           ▼        ▼        ▼
+        CALL #1  CALL #2  CALL #N
+           │        │        │
+           └────────┼────────┘
                     │
                     ▼
           CONCURRENT STATE RACE
@@ -44,7 +44,7 @@ A policy decision made too far away from execution can leave room for:
           ┌─────────┴─────────┐
           │                   │
           ▼                   ▼
-   DUPLICATE EXECUTION    OVERSPEND
+   DUPLICATE EXECUTION     OVERSPEND
 ```
 
 AEGIS moves the authorization boundary directly in front of tool execution.
@@ -56,18 +56,18 @@ AEGIS moves the authorization boundary directly in front of tool execution.
                  TOOL INTENT
                      │
                      ▼
-          ┌─────────────────────┐
-          │      🛡️ AEGIS       │
-          │  AUTHORIZATION GATE │
-          └──────────┬──────────┘
-                     │
-              ┌──────┴──────┐
-              │             │
-              ▼             ▼
-            ALLOW          DENY
-              │             │
-              ▼             ▼
-        EXECUTE TOOL      🛑 BLOCK
+           ┌─────────────────────┐
+           │      🛡️ AEGIS       │
+           │  AUTHORIZATION GATE │
+           └──────────┬──────────┘
+                      │
+                ┌─────┴─────┐
+                │           │
+                ▼           ▼
+              ALLOW       DENY
+                │           │
+                ▼           ▼
+          EXECUTE TOOL    🛑 BLOCK
 ```
 
 > **The protected tool executes only after an explicit ALLOW decision.**
@@ -76,7 +76,7 @@ AEGIS moves the authorization boundary directly in front of tool execution.
 
 # ⚡ What AEGIS Does
 
-AEGIS Core 3.1.0 focuses on the economic and authorization boundary between an autonomous agent and a high-risk external action.
+AEGIS Core 3.2.0 focuses on the economic and authorization boundary between an autonomous agent and a high-risk external action.
 
 ### 🔒 Atomic Budget Enforcement
 
@@ -192,7 +192,7 @@ $10.00
  ALLOW
    │
    ▼
-$7.00
+ $7.00
 ```
 
 ---
@@ -223,10 +223,10 @@ AEGIS evaluates the action before external execution:
              └──────┬──────┘
                     │
                     ▼
-            budget_exhausted
+             budget_exhausted
                     │
                     ▼
-            🛑 TOOL BLOCKED
+             🛑 TOOL BLOCKED
 ```
 
 Integration pattern:
@@ -289,21 +289,21 @@ Conflicting replay:
 SAME TRANSACTION ID
         │
         ├── original amount: $1.00
-        └── new amount:    $100.00
+        └── new amount:      $100.00
                     │
                     ▼
                   DENY
                     │
                     ▼
-          idempotency_conflict
+           idempotency_conflict
 ```
 
 Validated:
 
 ```text
-Exact replay does not double-debit       PASS
-Same ID + different amount blocked       PASS
-Same ID + different operation blocked    PASS
+Exact replay does not double-debit        PASS
+Same ID + different amount blocked        PASS
+Same ID + different operation blocked     PASS
 ```
 
 ---
@@ -313,10 +313,10 @@ Same ID + different operation blocked    PASS
 AEGIS signs deterministic authorization semantics rather than an unstructured success flag.
 
 ```text
-            POLICY EVALUATION
+             POLICY EVALUATION
                     │
                     ▼
-         DETERMINISTIC PAYLOAD
+          DETERMINISTIC PAYLOAD
                     │
                     ├── agent_did
                     ├── operation
@@ -325,16 +325,16 @@ AEGIS signs deterministic authorization semantics rather than an unstructured su
                     └── tool-call binding
                     │
                     ▼
-                 SHA-256
+                  SHA-256
                     │
                     ▼
-                 Ed25519
+                  Ed25519
                     │
                     ▼
-          SIGNED POLICY RECEIPT
+           SIGNED POLICY RECEIPT
                     │
                     ▼
-              action_ref
+                action_ref
 ```
 
 Example receipt:
@@ -394,8 +394,8 @@ MODIFIED PAYLOAD
 Validated:
 
 ```text
-Signature verification             PASS
-Tampered authorization rejected    PASS
+Signature verification              PASS
+Tampered authorization rejected     PASS
 ```
 
 ---
@@ -408,21 +408,21 @@ AEGIS is designed to prefer denial over silent authorization when the protected 
           INTERNAL FAILURE
                  │
                  ▼
-              🛑 DENY
+               🛑 DENY
                  │
                  ▼
-        TOOL MUST NOT EXECUTE
+         TOOL MUST NOT EXECUTE
 ```
 
 Validated forced cryptographic failure:
 
 ```text
 BALANCE BEFORE:       10.00
-DECISION:             deny
+DECISION:              deny
 BALANCE AFTER:        10.00
-BALANCE PRESERVED:    True
-FAIL-CLOSED:          True
-ROLLBACK:             PASS
+BALANCE PRESERVED:     True
+FAIL-CLOSED:           True
+ROLLBACK:              PASS
 ```
 
 Configured invalid-key behavior:
@@ -464,7 +464,7 @@ AEGIS was exercised against a focused matrix of economic failure scenarios.
 ```text
 TOTAL TESTS: 12
 PASS:        12
-FAIL:        0
+FAIL:         0
 
 FINAL RESULT: PASS
 ```
@@ -478,10 +478,10 @@ A 1,000-request adversarial contention test was executed against a budget capabl
 Configuration:
 
 ```text
-REQUESTS:         1,000
-WORKERS:          100
-INITIAL BALANCE:  $10.00
-AMOUNT EACH:      $10.00
+REQUESTS:          1,000
+WORKERS:             100
+INITIAL BALANCE:   $10.00
+AMOUNT EACH:       $10.00
 ```
 
 Result:
@@ -489,21 +489,21 @@ Result:
 ```text
                  $10 AVAILABLE
                        │
-          1,000 COMPETING REQUESTS
+            1,000 COMPETING REQUESTS
                        │
                        ▼
-                  AEGIS LOCK
+                   AEGIS LOCK
                        │
-               ┌───────┴───────┐
-               │               │
-               ▼               ▼
-          1 × ALLOW       999 × DENY
+                ┌──────┴──────┐
+                │             │
+                ▼             ▼
+           1 × ALLOW      999 × DENY
                │
                ▼
-          $10 AUTHORIZED
+           $10 AUTHORIZED
                │
                ▼
-         FINAL BALANCE $0
+          FINAL BALANCE $0
 ```
 
 Measured result:
@@ -528,41 +528,41 @@ It does not demonstrate cross-process or distributed consensus.
 AEGIS includes an isolated L3 settlement layer that consumes a signed authorization before mutating settlement balances.
 
 ```text
-              AI AGENT
+               AI AGENT
                   │
                   ▼
-        AEGIS AUTHORIZATION
+         AEGIS AUTHORIZATION
                   │
-          SHA-256 + Ed25519
-                  │
-                  ▼
-        SIGNED POLICY RECEIPT
+            SHA-256 + Ed25519
                   │
                   ▼
-      ┌──────────────────────┐
-      │   L3 VERIFICATION    │
-      │                      │
-      │ ✓ decision = allow   │
-      │ ✓ payload rebuilt    │
-      │ ✓ action_ref         │
-      │ ✓ Ed25519 signature  │
-      └──────────┬───────────┘
-                 │
-                 ▼
-          BEGIN IMMEDIATE
-                 │
-          ┌──────┴──────┐
-          │             │
-          ▼             ▼
-      DEBIT BUYER   CREDIT SELLER
-          │             │
-          └──────┬──────┘
-                 │
-                 ▼
-       SETTLEMENT RECORD
-                 │
-                 ▼
-               COMMIT
+         SIGNED POLICY RECEIPT
+                  │
+                  ▼
+       ┌──────────────────────┐
+       │   L3 VERIFICATION    │
+       │                      │
+       │ ✓ decision = allow   │
+       │ ✓ payload rebuilt    │
+       │ ✓ action_ref         │
+       │ ✓ Ed25519 signature  │
+       └──────────┬───────────┘
+                  │
+                  ▼
+            BEGIN IMMEDIATE
+                  │
+            ┌─────┴─────┐
+            │           │
+            ▼           ▼
+        DEBIT BUYER  CREDIT SELLER
+            │           │
+            └─────┬─────┘
+                  │
+                  ▼
+          SETTLEMENT RECORD
+                  │
+                  ▼
+                COMMIT
 ```
 
 If settlement fails after the transaction begins:
@@ -745,9 +745,9 @@ MEDIAN = 0.969200 ms
 ### Relative measured cost
 
 ```text
-SIGNED / DECISION:       95.80×
-FILE L3 / MEMORY L3:      6.61×
-L3 MEMORY / SIGNED:       3.06×
+SIGNED / DECISION:        95.80×
+FILE L3 / MEMORY L3:       6.61×
+L3 MEMORY / SIGNED:        3.06×
 ```
 
 ---
@@ -796,18 +796,18 @@ The final evidence benchmark also isolates common measurement contamination.
 Measured write to `os.devnull`:
 
 ```text
-NO-PRINT MEDIAN:        0.200 µs
-PRINT MEDIAN:           2.400 µs
-ADDED MEDIAN COST:      2.200 µs
+NO-PRINT MEDIAN:         0.200 µs
+PRINT MEDIAN:            2.400 µs
+ADDED MEDIAN COST:       2.200 µs
 ```
 
 ### Intentional `sleep(0.001)`
 
 ```text
-REQUESTED SLEEP:        1.000 ms
-OBSERVED MEDIAN:        1.696 ms
-P95:                    1.941 ms
-P99:                    2.251 ms
+REQUESTED SLEEP:         1.000 ms
+OBSERVED MEDIAN:         1.696 ms
+P95:                     1.941 ms
+P99:                     2.251 ms
 ```
 
 Therefore intentional sleeps and console/debug work are kept conceptually separate from engine latency claims.
@@ -856,20 +856,20 @@ Current focused evidence:
 
 ```text
 ┌───────────────────────────────────────────────┐
-│              AEGIS SECURITY                  │
+│              AEGIS SECURITY                   │
 ├───────────────────────────────────────────────┤
-│ Cryptographic rollback                 PASS  │
-│ Idempotency conflict                   PASS  │
-│ tool_call_id binding                   PASS  │
-│ Invalid configured key                 PASS  │
-│ Fail-closed startup                    PASS  │
-│ Ed25519 verification                   PASS  │
-│ Tamper detection                       PASS  │
-│ DENY → tool not executed               PASS  │
-│ Decimal boundary handling              PASS  │
-│ Financial-loss matrix            12/12 PASS  │
-│ 1,000-request double-spend             PASS  │
-│ L3 settlement matrix               7/7 PASS  │
+│ Cryptographic rollback                  PASS  │
+│ Idempotency conflict                    PASS  │
+│ tool_call_id binding                    PASS  │
+│ Invalid configured key                  PASS  │
+│ Fail-closed startup                     PASS  │
+│ Ed25519 verification                    PASS  │
+│ Tamper detection                        PASS  │
+│ DENY → tool not executed                PASS  │
+│ Decimal boundary handling               PASS  │
+│ Financial-loss matrix             12/12 PASS  │
+│ 1,000-request double-spend              PASS  │
+│ L3 settlement matrix                7/7 PASS  │
 └───────────────────────────────────────────────┘
 ```
 
@@ -952,7 +952,7 @@ CORE SECURITY              PASS
 FINANCIAL MATRIX      12/12 PASS
 DOUBLE-SPEND               PASS
 L3 SECURITY            7/7 PASS
-PERFORMANCE EVIDENCE   COMPLETE
+PERFORMANCE EVIDENCE    COMPLETE
 ```
 
 ---
@@ -963,16 +963,16 @@ PERFORMANCE EVIDENCE   COMPLETE
                          AI AGENT
                             │
                             ▼
-                        TOOL INTENT
+                         TOOL INTENT
                             │
                             ▼
                 ┌──────────────────────┐
                 │   🛡️ AEGIS CORE     │
                 │                      │
-                │  Monetary Validation │
-                │  Idempotency         │
-                │  Atomic Lock         │
-                │  Budget Enforcement  │
+                │ Monetary Validation  │
+                │ Idempotency          │
+                │ Atomic Lock          │
+                │ Budget Enforcement   │
                 └──────────┬───────────┘
                            │
                     ┌──────┴──────┐
@@ -996,10 +996,10 @@ PERFORMANCE EVIDENCE   COMPLETE
           ┌─────────┴─────────┐
           │                   │
           ▼                   ▼
-  PROTECTED TOOL        L3 SETTLEMENT
+   PROTECTED TOOL       L3 SETTLEMENT
                               │
                               ▼
-                    VERIFY AUTHORIZATION
+                      VERIFY AUTHORIZATION
                               │
                               ▼
                        BEGIN IMMEDIATE
@@ -1007,7 +1007,7 @@ PERFORMANCE EVIDENCE   COMPLETE
                      ┌────────┴────────┐
                      │                 │
                      ▼                 ▼
-                  DEBIT              CREDIT
+                   DEBIT             CREDIT
                      │                 │
                      └────────┬────────┘
                               │
@@ -1059,7 +1059,7 @@ The isolated L3 layer performs transactional buyer → seller mutation and recor
 
 # ⚠️ Current Scope & Limitations
 
-**AEGIS Core 3.1.0 is Beta software.**
+**AEGIS Core 3.2.0 is Beta software.**
 
 ## Current tested scope
 
@@ -1139,17 +1139,17 @@ Local Atomic L3 Settlement
                  MULTIPLE AGENTS
                        │
                        ▼
-               DISTRIBUTED AEGIS
+                DISTRIBUTED AEGIS
                        │
-          ┌────────────┼────────────┐
-          │            │            │
-          ▼            ▼            ▼
-     Shared State   Coordination   Persistence
-          │            │            │
-          └────────────┼────────────┘
+           ┌───────────┼───────────┐
+           │           │           │
+           ▼           ▼           ▼
+      Shared State  Coordination  Persistence
+           │           │           │
+           └───────────┼───────────┘
                        │
                        ▼
-             DISTRIBUTED SETTLEMENT
+              DISTRIBUTED SETTLEMENT
 ```
 
 The distributed architecture is a direction, **not a claim about the current implementation**.
@@ -1166,26 +1166,26 @@ It operates at the execution boundary:
               AGENT REASONING
                     │
                     ▼
-                TOOL INTENT
+                 TOOL INTENT
                     │
                     ▼
-              🛡️ AEGIS
+                 🛡️ AEGIS
                     │
-       ┌────────────┼────────────┐
-       │            │            │
-       ▼            ▼            ▼
-    BUDGET      IDEMPOTENCY   CRYPTOGRAPHY
-       │            │            │
-       └────────────┼────────────┘
+        ┌───────────┼───────────┐
+        │           │           │
+        ▼           ▼           ▼
+     BUDGET     IDEMPOTENCY  CRYPTOGRAPHY
+        │           │           │
+        └───────────┼───────────┘
                     │
                     ▼
-               ALLOW / DENY
+                ALLOW / DENY
                     │
               ┌─────┴─────┐
               │           │
               ▼           ▼
-         TOOL EXECUTION   L3
-                         SETTLEMENT
+        TOOL EXECUTION     L3
+                       SETTLEMENT
 ```
 
 **The goal is narrow: make economically sensitive agent actions explicitly authorized, cryptographically verifiable, and testable before irreversible execution.**
@@ -1217,7 +1217,7 @@ DEMO-READY
 | | |
 |:---|:---|
 | **Distribution** | `aegis-core-lortuarte-sdk` |
-| **Version** | `3.1.0` |
+| **Version** | `3.2.0` |
 | **Python** | `>=3.8` |
 | **Status** | Beta |
 | **License** | MIT |
