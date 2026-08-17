@@ -336,7 +336,7 @@ receipt = gate.evaluar_gasto(
     agent_did=agent,
     operation="payment",
     tool_call_id="precision-001",
-    amount_usd="1.001",
+    amount_usd="1.0000001",
 )
 
 passed = (

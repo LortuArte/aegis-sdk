@@ -3,14 +3,15 @@ import threading
 import time
 
 from decimal import Decimal, InvalidOperation
-from typing import Optional
 
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
 from .aegis_sdk import AegisCryptoEngine
 
 
-CENT = Decimal("0.01")
+MONEY_QUANTUM = Decimal("0.000001")
+MONEY_SCALE = 1_000_000
+MAX_DECIMAL_PLACES = 6
 OPERATION_PREFIX = "l3_transfer:"
 
 
@@ -26,7 +27,7 @@ class AegisL3Settlement:
     - amount bound to signed payload
     - tool_call_id bound to signed payload
     - atomic SQLite transaction
-    - integer cents, not float
+    - integer monetary units, not float
     - settlement idempotency
     - rollback on persistence failure
     - process-local concurrency lock
@@ -58,19 +59,84 @@ class AegisL3Settlement:
                 "PRAGMA journal_mode = WAL"
             )
 
-        self._initialize_schema()
+        try:
+            self._assert_compatible_schema()
+            self._initialize_schema()
+
+        except Exception:
+            self.conn.close()
+            raise
 
     # ======================================================================
     # SCHEMA
     # ======================================================================
+
+    def _assert_compatible_schema(self):
+        accounts_exists = self.conn.execute(
+            """
+            SELECT 1
+            FROM sqlite_master
+            WHERE type = 'table'
+              AND name = 'accounts'
+            """
+        ).fetchone()
+
+        if accounts_exists is not None:
+            columns = {
+                row["name"]
+                for row in self.conn.execute(
+                    "PRAGMA table_info(accounts)"
+                ).fetchall()
+            }
+
+            if "balance_cents" in columns:
+                raise RuntimeError(
+                    "Legacy AEGIS L3 schema detected: "
+                    "balance_cents is incompatible with "
+                    "6-decimal monetary units"
+                )
+
+            if "balance_units" not in columns:
+                raise RuntimeError(
+                    "Unsupported AEGIS accounts schema"
+                )
+
+        settlements_exists = self.conn.execute(
+            """
+            SELECT 1
+            FROM sqlite_master
+            WHERE type = 'table'
+              AND name = 'settlements'
+            """
+        ).fetchone()
+
+        if settlements_exists is not None:
+            columns = {
+                row["name"]
+                for row in self.conn.execute(
+                    "PRAGMA table_info(settlements)"
+                ).fetchall()
+            }
+
+            if "amount_cents" in columns:
+                raise RuntimeError(
+                    "Legacy AEGIS L3 schema detected: "
+                    "amount_cents is incompatible with "
+                    "6-decimal monetary units"
+                )
+
+            if "amount_units" not in columns:
+                raise RuntimeError(
+                    "Unsupported AEGIS settlements schema"
+                )
 
     def _initialize_schema(self):
         self.conn.execute(
             """
             CREATE TABLE IF NOT EXISTS accounts (
                 agent_id TEXT PRIMARY KEY,
-                balance_cents INTEGER NOT NULL
-                    CHECK(balance_cents >= 0)
+                balance_units INTEGER NOT NULL
+                    CHECK(balance_units >= 0)
             )
             """
         )
@@ -82,8 +148,8 @@ class AegisL3Settlement:
                 tool_call_id TEXT UNIQUE NOT NULL,
                 buyer_id TEXT NOT NULL,
                 seller_id TEXT NOT NULL,
-                amount_cents INTEGER NOT NULL
-                    CHECK(amount_cents > 0),
+                amount_units INTEGER NOT NULL
+                    CHECK(amount_units > 0),
                 action_ref TEXT NOT NULL,
                 created_ns INTEGER NOT NULL
             )
@@ -95,7 +161,7 @@ class AegisL3Settlement:
     # ======================================================================
 
     @staticmethod
-    def _usd_to_cents(
+    def _usd_to_units(
         amount_usd
     ) -> int:
         try:
@@ -118,22 +184,26 @@ class AegisL3Settlement:
                 "Amount must be positive"
             )
 
-        if amount.as_tuple().exponent < -2:
+        if amount.as_tuple().exponent < -MAX_DECIMAL_PLACES:
             raise ValueError(
-                "Amount cannot exceed two decimals"
+                "Amount cannot exceed six decimals"
             )
 
-        normalized = amount.quantize(CENT)
+        normalized = amount.quantize(
+            MONEY_QUANTUM
+        )
 
         return int(
-            normalized * 100
+            normalized * MONEY_SCALE
         )
 
     @staticmethod
-    def _cents_to_usd(
-        cents: int
+    def _units_to_usd(
+        units: int
     ) -> str:
-        return f"{Decimal(cents) / 100:.2f}"
+        return (
+            f"{Decimal(units) / MONEY_SCALE:.6f}"
+        )
 
     # ======================================================================
     # ACCOUNT SETUP
@@ -144,7 +214,7 @@ class AegisL3Settlement:
         agent_id: str,
         balance_usd
     ):
-        cents = self._usd_to_cents(
+        units = self._usd_to_units(
             balance_usd
         )
 
@@ -153,16 +223,16 @@ class AegisL3Settlement:
                 """
                 INSERT INTO accounts (
                     agent_id,
-                    balance_cents
+                    balance_units
                 )
                 VALUES (?, ?)
                 ON CONFLICT(agent_id)
                 DO UPDATE SET
-                    balance_cents = excluded.balance_cents
+                    balance_units = excluded.balance_units
                 """,
                 (
                     agent_id,
-                    cents
+                    units
                 )
             )
 
@@ -172,7 +242,7 @@ class AegisL3Settlement:
     ) -> Decimal:
         row = self.conn.execute(
             """
-            SELECT balance_cents
+            SELECT balance_units
             FROM accounts
             WHERE agent_id = ?
             """,
@@ -186,10 +256,10 @@ class AegisL3Settlement:
 
         return (
             Decimal(
-                row["balance_cents"]
+                row["balance_units"]
             )
-            / Decimal("100")
-        ).quantize(CENT)
+            / Decimal(MONEY_SCALE)
+        ).quantize(MONEY_QUANTUM)
 
     # ======================================================================
     # AUTHORIZATION VERIFICATION
@@ -325,8 +395,8 @@ class AegisL3Settlement:
             "seller_id":
                 seller_id,
 
-            "amount_cents":
-                cls._usd_to_cents(
+            "amount_units":
+                cls._usd_to_units(
                     receipt["amount_usd"]
                 ),
 
@@ -373,8 +443,8 @@ class AegisL3Settlement:
             "seller_id"
         ]
 
-        amount_cents = authorization[
-            "amount_cents"
+        amount_units = authorization[
+            "amount_units"
         ]
 
         tool_call_id = authorization[
@@ -439,9 +509,9 @@ class AegisL3Settlement:
                         ],
 
                     "amount_usd":
-                        self._cents_to_usd(
+                        self._units_to_usd(
                             existing[
-                                "amount_cents"
+                                "amount_units"
                             ]
                         ),
 
@@ -465,7 +535,7 @@ class AegisL3Settlement:
 
                 buyer = self.conn.execute(
                     """
-                    SELECT balance_cents
+                    SELECT balance_units
                     FROM accounts
                     WHERE agent_id = ?
                     """,
@@ -474,7 +544,7 @@ class AegisL3Settlement:
 
                 seller = self.conn.execute(
                     """
-                    SELECT balance_cents
+                    SELECT balance_units
                     FROM accounts
                     WHERE agent_id = ?
                     """,
@@ -492,16 +562,16 @@ class AegisL3Settlement:
                     )
 
                 buyer_balance = buyer[
-                    "balance_cents"
+                    "balance_units"
                 ]
 
                 seller_balance = seller[
-                    "balance_cents"
+                    "balance_units"
                 ]
 
                 if (
                     buyer_balance
-                    < amount_cents
+                    < amount_units
                 ):
                     raise ValueError(
                         "Insufficient settlement balance"
@@ -509,12 +579,12 @@ class AegisL3Settlement:
 
                 new_buyer_balance = (
                     buyer_balance
-                    - amount_cents
+                    - amount_units
                 )
 
                 new_seller_balance = (
                     seller_balance
-                    + amount_cents
+                    + amount_units
                 )
 
                 # ==========================================================
@@ -524,7 +594,7 @@ class AegisL3Settlement:
                 self.conn.execute(
                     """
                     UPDATE accounts
-                    SET balance_cents = ?
+                    SET balance_units = ?
                     WHERE agent_id = ?
                     """,
                     (
@@ -543,7 +613,7 @@ class AegisL3Settlement:
                 self.conn.execute(
                     """
                     UPDATE accounts
-                    SET balance_cents = ?
+                    SET balance_units = ?
                     WHERE agent_id = ?
                     """,
                     (
@@ -563,7 +633,7 @@ class AegisL3Settlement:
                         tool_call_id,
                         buyer_id,
                         seller_id,
-                        amount_cents,
+                        amount_units,
                         action_ref,
                         created_ns
                     )
@@ -574,7 +644,7 @@ class AegisL3Settlement:
                         tool_call_id,
                         buyer_id,
                         seller_id,
-                        amount_cents,
+                        amount_units,
                         action_ref,
                         time.time_ns()
                     )
@@ -598,8 +668,8 @@ class AegisL3Settlement:
                         seller_id,
 
                     "amount_usd":
-                        self._cents_to_usd(
-                            amount_cents
+                        self._units_to_usd(
+                            amount_units
                         ),
 
                     "action_ref":

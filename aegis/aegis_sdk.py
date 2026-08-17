@@ -17,7 +17,8 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.exceptions import InvalidSignature
 
 
-CENT = Decimal("0.01")
+MONEY_QUANTUM = Decimal("0.000001")
+MAX_DECIMAL_PLACES = 6
 
 
 # ==============================================================================
@@ -255,13 +256,13 @@ class AegisLocalPolicyGate:
                 "amount_usd debe ser mayor que cero"
             )
 
-        if amount.as_tuple().exponent < -2:
+        if amount.as_tuple().exponent < -MAX_DECIMAL_PLACES:
             raise ValueError(
-                "amount_usd no puede tener mas de 2 decimales"
+                "amount_usd no puede tener mas de 6 decimales"
             )
 
         return amount.quantize(
-            CENT,
+            MONEY_QUANTUM,
             rounding=ROUND_HALF_UP
         )
 
@@ -361,7 +362,7 @@ class AegisLocalPolicyGate:
                     recibo_historico.get(
                         "amount_usd"
                     )
-                    == f"{amount:.2f}"
+                    == f"{amount:.6f}"
                 )
 
                 same_tool_call_id = (
@@ -387,7 +388,7 @@ class AegisLocalPolicyGate:
                         agent_did=agent_did,
                         operation=operation,
                         tool_call_id=tool_call_id,
-                        amount_usd=f"{amount:.2f}",
+                        amount_usd=f"{amount:.6f}",
                         reason="idempotency_conflict"
                     )
 
@@ -426,7 +427,7 @@ class AegisLocalPolicyGate:
                         current_balance
                         - amount
                     ).quantize(
-                        CENT
+                        MONEY_QUANTUM
                     )
 
                     decision = "allow"
@@ -454,7 +455,7 @@ class AegisLocalPolicyGate:
                     "agent_did": agent_did,
                     "operation": operation,
                     "tool_call_id": tool_call_id,
-                    "amount_usd": f"{amount:.2f}",
+                    "amount_usd": f"{amount:.6f}",
                     "policy_decision": decision,
                     "policy_attenuations": (
                         sorted(
@@ -569,6 +570,6 @@ class AegisLocalPolicyGate:
                     agent_did=agent_did,
                     operation=operation,
                     tool_call_id=tool_call_id,
-                    amount_usd=f"{amount:.2f}",
+                    amount_usd=f"{amount:.6f}",
                     reason="internal_engine_fault"
                 )
