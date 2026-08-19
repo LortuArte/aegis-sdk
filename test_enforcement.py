@@ -25,7 +25,7 @@ decision_allow = gate.evaluar_gasto(
     5.00
 )
 
-if decision_allow["policy_decision"] == "allow":
+if decision_allow["execution_permitted"] is True:
     result_allow = fake_payment_tool(agent, 5.00)
 else:
     result_allow = "BLOCKED"
@@ -42,7 +42,7 @@ decision_deny = gate.evaluar_gasto(
     999.00
 )
 
-if decision_deny["policy_decision"] == "allow":
+if decision_deny["execution_permitted"] is True:
     result_deny = fake_payment_tool(agent, 999.00)
 else:
     result_deny = "BLOCKED"

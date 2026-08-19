@@ -7,7 +7,7 @@
 AEGIS is a security and economic-control layer for high-risk AI-agent tool calls — combining atomic budget enforcement, replay-safe authorization, deterministic receipts, SHA-256 action references, Ed25519 signatures, and an isolated atomic L3 settlement layer.
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
-[![Version](https://img.shields.io/badge/version-3.3.0-blue)](https://pypi.org/project/aegis-core-lortuarte-sdk/)
+[![Version](https://img.shields.io/badge/version-3.4.0-blue)](https://pypi.org/project/aegis-core-lortuarte-sdk/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Status](https://img.shields.io/badge/status-Beta-orange)](#current-scope--limitations)
 [![Security](https://img.shields.io/badge/security-adversarially_tested-success)](#security-evidence)
@@ -76,7 +76,7 @@ AEGIS moves the authorization boundary directly in front of tool execution.
 
 # ⚡ What AEGIS Does
 
-AEGIS Core 3.3.0 focuses on the economic and authorization boundary between an autonomous agent and a high-risk external action.
+AEGIS Core 3.4.0 focuses on the economic and authorization boundary between an autonomous agent and a high-risk external action.
 
 ### 🔒 Atomic Budget Enforcement
 
@@ -125,7 +125,7 @@ An explicitly configured invalid Ed25519 private key aborts startup rather than 
 
 Economic state uses Python `Decimal` rather than binary floating-point arithmetic.
 
-AEGIS Core 3.3.0 supports monetary amounts with up to 6 decimal places.
+AEGIS Core 3.4.0 supports monetary amounts with up to 6 decimal places.
 
 - Minimum supported positive amount: `$0.000001`
 - `$0.001` micropayments are supported
@@ -174,7 +174,7 @@ receipt = gate.evaluar_gasto(
     amount_usd="3.00",
 )
 
-if receipt["policy_decision"] == "allow":
+if receipt["execution_permitted"] is True:
     print("AUTHORIZED")
     # Execute the protected tool here.
 else:
@@ -246,7 +246,7 @@ receipt = gate.evaluar_gasto(
     amount_usd="20.00",
 )
 
-if receipt["policy_decision"] == "allow":
+if receipt["execution_permitted"] is True:
     result = execute_payment()
 else:
     result = "BLOCKED"
@@ -272,6 +272,7 @@ amount:       $3.00
         │
         ├── budget decreases once
         ├── cached: False
+        ├── execution_permitted: True
         └── signed receipt created
 ```
 
@@ -287,8 +288,11 @@ amount:       $3.00
         │
         ├── same action_ref
         ├── cached: True
+        ├── execution_permitted: False
         └── NO second debit
 ```
+
+`policy_decision` describes the signed historical authorization. External tools must execute only when `execution_permitted` is `True`. Exact replays retain the historical receipt but receive no new process-local execution grant.
 
 Conflicting replay:
 
@@ -311,6 +315,7 @@ Validated:
 Exact replay does not double-debit        PASS
 Same ID + different amount blocked        PASS
 Same ID + different operation blocked     PASS
+100 same-ID concurrent retries grant one execution    PASS
 ```
 
 ---
@@ -355,7 +360,8 @@ Example receipt:
     "policy_attenuations": [],
     "policy_signature": "ed25519:...",
     "action_ref": "...",
-    "cached": False
+    "cached": False,
+    "execution_permitted": True
 }
 ```
 
@@ -1066,7 +1072,7 @@ The isolated L3 layer performs transactional buyer → seller mutation and recor
 
 # ⚠️ Current Scope & Limitations
 
-**AEGIS Core 3.3.0 is Beta software.**
+**AEGIS Core 3.4.0 is Beta software.**
 
 ## Current tested scope
 
@@ -1084,6 +1090,7 @@ The isolated L3 layer performs transactional buyer → seller mutation and recor
 ✓ Invalid configured-key rejection
 ✓ Economic rollback
 ✓ Concurrent local budget enforcement
+✓ One process-local execution grant across 100 same-ID concurrent retries
 ✓ Atomic SQLite L3 settlement
 ✓ L3 replay protection
 ✓ L3 tamper rejection
@@ -1111,6 +1118,12 @@ The isolated L3 layer performs transactional buyer → seller mutation and recor
 ✗ Stripe settlement guarantees
 
 ✗ Internet-scale production readiness
+
+✗ Exactly-once external side effects
+
+✗ Crash recovery after external dispatch
+
+✗ Automatic reserve / commit / release reconciliation
 ```
 
 These are separate production/distributed-system concerns and should not be inferred from the current local evidence.
@@ -1224,7 +1237,7 @@ DEMO-READY
 | | |
 |:---|:---|
 | **Distribution** | `aegis-core-lortuarte-sdk` |
-| **Version** | `3.3.0` |
+| **Version** | `3.4.0` |
 | **Python** | `>=3.8` |
 | **Status** | Beta |
 | **License** | MIT |

@@ -169,7 +169,7 @@
     <i class="fa-solid fa-shield-halved text-4xl text-aegis-cyan mb-6"></i>
     <h3 class="text-xl font-bold mb-3 text-white">Budget + Idempotency</h3>
     <p class="text-slate-400 text-sm">
-        AEGIS blocks over-budget execution and prevents exact logical replays from consuming economic state twice.
+        AEGIS blocks over-budget execution, prevents exact logical replays from consuming economic state twice, and marks cached replays as not permitted to execute again.
     </p>
 </div>
                 <!-- Feature 3 -->
@@ -177,7 +177,7 @@
     <i class="fa-solid fa-code text-4xl text-aegis-cyan mb-6"></i>
     <h3 class="text-xl font-bold mb-3 text-white">Python Integration</h3>
     <p class="text-slate-400 text-sm">
-        Place AEGIS immediately before high-risk payments, trades, paid API calls, or other external tool execution in Python agent workflows.
+        Place AEGIS immediately before high-risk external actions and execute only when <code>execution_permitted</code> is true. The current evidence is process-local and does not establish exactly-once external side effects.
     </p>
 </div>
             </div>

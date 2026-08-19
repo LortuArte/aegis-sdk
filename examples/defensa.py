@@ -21,7 +21,7 @@ for i in range(1, 6):
         amount_usd=5.00
     )
     
-    if decision.get("policy_decision") == "allow":
+    if decision.get("execution_permitted") is True:
         saldo_gastado += 5.00
         print(f"\033[92m[✓] Transaction ALLOWED. Receipt: {decision['policy_signature'][:15]}...\033[0m")
     else:

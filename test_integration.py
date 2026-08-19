@@ -12,7 +12,7 @@ AMOUNT = 1.00
 
 def execute_payment_tool(decision):
     """Simulated payment tool. It must never execute when policy denies."""
-    if decision["policy_decision"] != "allow":
+    if decision.get("execution_permitted") is not True:
         return "BLOCKED"
 
     return "PAYMENT_EXECUTED"
