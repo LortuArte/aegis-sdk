@@ -292,7 +292,8 @@ class AegisLocalPolicyGate:
             ],
             "policy_signature": "error_no_signature",
             "action_ref": "0" * 64,
-            "cached": False
+            "cached": False,
+            "execution_permitted": False
         }
 
     # ==========================================================================
@@ -395,6 +396,10 @@ class AegisLocalPolicyGate:
                 recibo_historico[
                     "cached"
                 ] = True
+
+                recibo_historico[
+                    "execution_permitted"
+                ] = False
 
                 return recibo_historico
 
@@ -520,6 +525,12 @@ class AegisLocalPolicyGate:
                 recibo_final[
                     "cached"
                 ] = False
+
+                recibo_final[
+                    "execution_permitted"
+                ] = (
+                    decision == "allow"
+                )
 
                 # ==============================================================
                 # 9. ECONOMIC COMMIT

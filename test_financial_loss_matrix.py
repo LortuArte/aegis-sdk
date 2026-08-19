@@ -376,7 +376,7 @@ receipt = gate.evaluar_gasto(
     amount_usd="5.00",
 )
 
-if receipt["policy_decision"] == "allow":
+if receipt["execution_permitted"] is True:
     dangerous_payment_tool()
 else:
     tool_result = "BLOCKED"
