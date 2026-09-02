@@ -64,13 +64,13 @@ AEGIS moves the authorization boundary directly in front of tool execution.
                 ┌─────┴─────┐
                 │           │
                 ▼           ▼
-              ALLOW       DENY
-                │           │
-                ▼           ▼
-          EXECUTE TOOL    🛑 BLOCK
+ execution_permitted: True   execution_permitted: False
+                │                       │
+                ▼                       ▼
+          EXECUTE TOOL                🛑 BLOCK
 ```
 
-> **The protected tool executes only after an explicit ALLOW decision.**
+> **The protected tool executes only when `receipt["execution_permitted"] is True`.**
 
 ---
 
@@ -252,7 +252,7 @@ else:
     result = "BLOCKED"
 ```
 
-The integration layer remains responsible for ensuring the external tool is invoked only after `allow`.
+The integration layer remains responsible for ensuring the external tool is invoked only when `receipt["execution_permitted"] is True`.
 
 ---
 
@@ -1199,7 +1199,7 @@ It operates at the execution boundary:
         └───────────┼───────────┘
                     │
                     ▼
-                ALLOW / DENY
+        execution_permitted True / False
                     │
               ┌─────┴─────┐
               │           │
