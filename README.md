@@ -863,6 +863,58 @@ EXTERNAL FINANCIAL SETTLEMENT
 
 ---
 
+# 🌐 Independent External Evaluation — kube-coder
+
+AEGIS Core 3.4.0 has received a public **external source-level evaluation and benchmark** in [kube-coder issue #573](https://github.com/imran31415/kube-coder/issues/573).
+
+The external project-side evaluator inspected the published artifacts and source, verified package hashes, reviewed package behavior, and benchmarked the relevant local execution paths.
+
+### Externally reported local measurements
+
+| Path | Median | p95 | p99 |
+|:---|---:|---:|---:|
+| Process-local signed gate | **0.0582 ms** | **0.1042 ms** | **0.1260 ms** |
+| File-backed settlement, end-to-end | **1.1349 ms** | **3.2434 ms** | **4.6677 ms** |
+
+The evaluator described the package as real/readable and did **not** identify malicious package behavior. The fit decision, however, was **not to adopt AEGIS as the dependency for kube-coder Phase 4**.
+
+The reasons were architectural and are important:
+
+- kube-coder's LLM-turn cost is not fully known before the call, while AEGIS 3.4.0 expects a supplied amount before authorization;
+- kube-coder needs shared durable budget state across agent processes, while the AEGIS local gate is process-local;
+- Ed25519 receipts solve a trust-boundary problem that does not exist when policy and enforcement live inside the same trusted process;
+- kube-coder already has an in-process refusal point, so a network-latency race is not the relevant failure mode there.
+
+The same review then recorded AEGIS patterns worth carrying into kube-coder's own Phase 4 design:
+
+1. durable allow/deny decision receipts;
+2. idempotency with conflict detection;
+3. integer monetary units rather than binary float;
+4. evaluate → record → mutate commit ordering;
+5. fail-closed behavior on internal faults;
+6. attenuated policy outcomes for soft-cap/hard-cap behavior.
+
+**Evidence classification:**
+
+- External source review: **YES**
+- External benchmark: **YES**
+- External fit assessment: **YES**
+- Design influence: **YES**
+- kube-coder adoption: **NO**
+- kube-coder integration: **NO**
+- Production validation: **NO**
+- Institutional endorsement: **NO**
+
+Full evidence record: [EXTERNAL_EVALUATION_KUBE_CODER.md](EXTERNAL_EVALUATION_KUBE_CODER.md)
+
+Primary public sources:
+
+- [External evaluation and benchmark](https://github.com/imran31415/kube-coder/issues/573#issuecomment-5752986929)
+- [Phase 4 design notes derived from AEGIS scoping](https://github.com/imran31415/kube-coder/issues/573#issuecomment-5753002672)
+- [AEGIS author correction and scope clarification](https://github.com/imran31415/kube-coder/issues/573#issuecomment-5198491584)
+
+---
+
 # 🧪 Security Evidence
 
 Current focused evidence:
@@ -1214,21 +1266,19 @@ It operates at the execution boundary:
 
 # 📋 Evidence Status
 
-```text
-TESTED
-   │
-   ▼
- PASS
-   │
-   ▼
-REPRODUCIBLE
-   │
-   ▼
-DOCUMENTED
-   │
-   ▼
-DEMO-READY
-```
+| Evidence class | Status |
+|:---|:---:|
+| Local focused tests | ✅ PASS |
+| Local adversarial/concurrency tests | ✅ PASS |
+| Reproducible local benchmark suite | ✅ Documented |
+| Independent external source review | ✅ Completed |
+| Independent external benchmark | ✅ Completed |
+| External design influence | ✅ Documented |
+| External product integration | ❌ Not yet |
+| External production validation | ❌ Not yet |
+| Distributed/multiprocess guarantees | ❌ Not claimed |
+
+The external evidence is intentionally separated from local author-run evidence. See [EXTERNAL_EVALUATION_KUBE_CODER.md](EXTERNAL_EVALUATION_KUBE_CODER.md).
 
 ---
 
