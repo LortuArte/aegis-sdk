@@ -913,6 +913,30 @@ Primary public sources:
 - [Phase 4 design notes derived from AEGIS scoping](https://github.com/imran31415/kube-coder/issues/573#issuecomment-5753002672)
 - [AEGIS author correction and scope clarification](https://github.com/imran31415/kube-coder/issues/573#issuecomment-5198491584)
 
+
+---
+
+# 🌍 External Engineering Impact — PayMCP
+
+A retry/disconnect failure mode reported by **Iraitz / LortuArte** was credited in the merged upstream [PayMCP PR #52](https://github.com/PayMCP/paymcp/pull/52), **“Return the paid result on retry instead of running the tool twice.”**
+
+The upstream PR documents that a paid tool could execute, the client could disconnect before receiving the result, and a retry could execute the underlying tool again. For tools with side effects, the external action could therefore happen twice even though there was one payment.
+
+PayMCP's merged fix stores and replays the paid result instead of automatically re-executing the consequential tool path.
+
+**Evidence classification:**
+
+- Externally credited engineering finding: **YES**
+- Upstream fix merged: **YES**
+- Independent confirmation that retry ambiguity can cause duplicate consequential execution: **YES**
+- AEGIS dependency used by PayMCP: **NO**
+- AEGIS integration/adoption by PayMCP: **NO**
+- Production validation or endorsement of AEGIS: **NO**
+
+This is published as **external engineering impact and problem validation**, not as an AEGIS adoption claim.
+
+Full evidence record: [EXTERNAL_ENGINEERING_IMPACT_PAYMCP.md](EXTERNAL_ENGINEERING_IMPACT_PAYMCP.md)
+
 ---
 
 # 🧪 Security Evidence
@@ -1274,6 +1298,7 @@ It operates at the execution boundary:
 | Independent external source review | ✅ Completed |
 | Independent external benchmark | ✅ Completed |
 | External design influence | ✅ Documented |
+| Externally credited engineering finding | ✅ PayMCP PR #52 merged |
 | External product integration | ❌ Not yet |
 | External production validation | ❌ Not yet |
 | Distributed/multiprocess guarantees | ❌ Not claimed |
