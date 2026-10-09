@@ -1,0 +1,45 @@
+name: AEGIS External Reproduction
+
+on:
+  workflow_dispatch:
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout fixture
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Prepare isolated directory
+        run: |
+          mkdir -p /tmp/aegis-external
+          cp external_validation/AEGIS_EXTERNAL_RUN_3_4_0.py /tmp/aegis-external/
+
+      - name: Install published AEGIS 3.4.0
+        working-directory: /tmp/aegis-external
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "aegis-core-lortuarte-sdk==3.4.0"
+
+      - name: Verify installed package origin
+        working-directory: /tmp/aegis-external
+        run: |
+          python -c "import aegis; print('VERSION:', aegis.__version__); print('MODULE:', aegis.__file__)"
+
+      - name: Run reproduction
+        working-directory: /tmp/aegis-external
+        run: |
+          python AEGIS_EXTERNAL_RUN_3_4_0.py | tee AEGIS_EXTERNAL_RESULT.txt
+
+      - name: Upload raw result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aegis-external-result
+          path: /tmp/aegis-external/AEGIS_EXTERNAL_RESULT.txt
