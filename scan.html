@@ -1,198 +1,28 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agent Economic Failure Scan | AEGIS</title>
-  <meta name="description" content="Fixed-scope feasibility screening and paid review of one authorized AI-agent execution path for retry, replay, concurrency, and ambiguous outcomes.">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter','sans-serif'], mono: ['Fira Code','monospace'] },
-          colors: { aegis: { dark:'#0B0E14', card:'#151A23', red:'#FF3366', green:'#00FA9A', cyan:'#00E5FF' } }
-        }
-      }
-    }
-  </script>
-  <style>
-    body { background:#0B0E14; color:#E2E8F0; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b111b">
+<meta name="description" content="AEGIS Proof: a fixed-scope, authorized review of one AI agent payment, paid API, checkout or economic execution path. Reproducible evidence, a bounded verdict and recommendations.">
+<meta property="og:type" content="website"><meta property="og:title" content="AEGIS Proof — Reproducible Economic Execution Verification">
+<meta property="og:description" content="Can your AI agent execute or charge twice after a lost response? Review one authorized test path. Free feasibility check first.">
+<meta property="og:url" content="https://aegis-api.com/scan.html">
+<title>AEGIS Proof | Verify AI Agent Economic Execution</title>
+<style>
+:root{color-scheme:dark;--bg:#0b111b;--surface:#121d2a;--surface2:#192838;--edge:#304357;--ink:#f1f7fb;--muted:#aebdca;--aqua:#55e6d5;--blue:#94c9ff;--gold:#f7cf7e}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.58 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--aqua)}a:hover{text-decoration-thickness:2px}a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:4px}.wrap{max-width:1100px;margin:auto;padding:0 24px}.top{border-bottom:1px solid var(--edge)}.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{text-decoration:none;color:var(--ink);font-size:1.15rem;font-weight:800;letter-spacing:.035em}.brand span{color:var(--aqua)}.navlinks{display:flex;gap:22px;flex-wrap:wrap;font-size:.91rem}.navlinks a{text-decoration:none;color:var(--muted)}.navlinks a:hover{color:white}.hero{padding:84px 0 69px;background:radial-gradient(ellipse at 90% -15%,#15566550,transparent 64%),radial-gradient(ellipse at 0 95%,#24487935,transparent 55%)}.kicker{color:var(--aqua);font-size:.8rem;letter-spacing:.13em;font-weight:800;text-transform:uppercase}h1{font-size:clamp(2.25rem,5vw,4.4rem);letter-spacing:-.048em;line-height:1.11;max-width:930px;margin:20px 0}h1 em{font-style:normal;color:var(--aqua)}.lead{max-width:810px;color:var(--muted);font-size:clamp(1.1rem,2vw,1.27rem)}.btns{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 16px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:15px 22px;min-height:50px;border-radius:10px;font-weight:800;text-decoration:none;border:1px solid var(--edge);background:var(--surface);color:var(--ink)}.btn.primary{background:var(--aqua);border-color:var(--aqua);color:#06212a}.btn:hover{filter:brightness(1.07)}.small{font-size:.875rem}.muted{color:var(--muted)}.capsule{border:1px solid #327b7e;background:#0a3537;border-radius:10px;padding:15px 17px;max-width:880px;color:#d6f9f6}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}.metric{border:1px solid var(--edge);border-radius:12px;padding:22px;background:#11202c}.metric strong{display:block;font-size:1.65rem;letter-spacing:-.04em}.metric span{display:block;color:var(--muted);font-size:.88rem;margin-top:4px}section{padding:66px 0;border-top:1px solid #243748}h2{font-size:clamp(1.7rem,3vw,2.45rem);letter-spacing:-.035em;line-height:1.2;margin:0 0 15px}h3{font-size:1.12rem;margin:0 0 8px}.sectionlead{color:var(--muted);max-width:770px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}.card{border:1px solid var(--edge);border-radius:14px;background:var(--surface);padding:24px}.card p{margin:0;color:var(--muted)}.stepnum{color:var(--aqua);font-weight:800;font-size:.86rem;letter-spacing:.09em}.case{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-top:30px}.panel{background:var(--surface);border:1px solid var(--edge);border-radius:13px;padding:24px}.panel ul{margin:10px 0 0;padding-left:21px}.panel li{margin:8px 0}.mono{font:13px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace}.bar{border:1px solid #b49347;border-radius:10px;padding:12px 15px;background:#372d1b;color:#ffe2a0}.tags{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.tag{border:1px solid var(--edge);border-radius:50px;padding:5px 12px;font-size:.85rem;color:#d5e2e9}.results{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:25px 0}.result{padding:20px;border:1px solid var(--edge);background:var(--surface);border-radius:12px}.result b{display:block;font-size:1.15rem;color:var(--aqua)}.result p{font-size:.9rem;margin:6px 0 0;color:var(--muted)}.fit{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:25px}.fit>div{border:1px solid var(--edge);border-radius:12px;padding:24px}.fit li{margin:8px 0}.proof{border-left:4px solid var(--aqua);padding:8px 0 10px 22px;max-width:880px}.faq{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}.faq article{padding:22px;border:1px solid var(--edge);border-radius:12px}.faq p{color:var(--muted);margin:0}.end{background:linear-gradient(135deg,#0e292f,#13243a)}.footer{border-top:1px solid var(--edge);padding:35px 0;color:var(--muted);font-size:.86rem}.footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer a{color:var(--muted)}@media(max-width:730px){.hero{padding:60px 0}.metrics,.grid,.results,.fit,.case,.faq{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column;justify-content:center;padding-top:13px;padding-bottom:13px}.navlinks{gap:15px}.btn{width:100%}section{padding:49px 0}}
+</style>
 </head>
-<body class="antialiased selection:bg-aegis-cyan selection:text-black">
-  <nav class="border-b border-white/10 bg-aegis-dark/95">
-    <div class="max-w-5xl mx-auto px-5 h-16 flex items-center justify-between">
-      <a href="/" class="font-bold tracking-tight">AEGIS<span class="text-white/40 font-light"> / FAILURE SCAN</span></a>
-      <a href="/" class="text-sm text-slate-400 hover:text-white">AEGIS Core</a>
-    </div>
-  </nav>
-
-  <main>
-    <section class="pt-20 pb-16">
-      <div class="max-w-5xl mx-auto px-5">
-        <div class="inline-flex px-3 py-1 rounded-full border border-aegis-cyan/30 bg-aegis-cyan/10 text-aegis-cyan text-xs font-bold tracking-widest uppercase">
-          Fixed-scope technical review
-        </div>
-
-        <h1 class="mt-6 text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
-          Find out whether retries or concurrency can duplicate an economic action in your AI-agent workflow.
-        </h1>
-
-        <p class="mt-6 text-xl text-slate-400 max-w-3xl leading-relaxed">
-          I assess one authorized agent, payment, wallet, or paid-tool path and deliver a bounded test result, evidence of what was observed, and focused remediation guidance where applicable — without production credentials or real funds.
-        </p>
-
-        <div class="mt-10 grid sm:grid-cols-3 gap-4">
-          <div class="bg-aegis-card border border-white/10 rounded-xl p-5">
-            <div class="text-aegis-cyan font-mono text-sm">SCOPE</div>
-            <div class="mt-2 font-bold text-xl">1 execution path</div>
-          </div>
-          <div class="bg-aegis-card border border-white/10 rounded-xl p-5">
-            <div class="text-aegis-cyan font-mono text-sm">DELIVERY</div>
-            <div class="mt-2 font-bold text-xl">48h target*</div>
-          </div>
-          <div class="bg-aegis-card border border-white/10 rounded-xl p-5">
-            <div class="text-aegis-cyan font-mono text-sm">FOUNDING PILOT</div>
-            <div class="mt-2 font-bold text-xl">€149 fixed</div>
-            <div class="mt-1 text-xs text-slate-500">First 3 assessments only</div>
-          </div>
-        </div>
-
-        <div class="mt-6 rounded-xl border border-aegis-green/30 bg-aegis-green/5 p-5">
-          <p class="text-sm text-slate-300">
-            <strong class="text-aegis-green">Free scope check first:</strong>
-            Send a repository or sandbox link for a no-charge feasibility review. If the path is suitable, I will confirm the exact authorized scope, the €149 pilot fee, any applicable taxes, and the 48-hour delivery target in writing before paid work begins. No purchase is required to request the scope check.
-          </p>
-        </div>
-
-        <div class="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-          <a
-            href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lortuarte765%40gmail.com&amp;su=AEGIS+Failure+Scan+%7C+Free+scope+review+request&amp;body=Hello+LortuArte%2C%0A%0AI+would+like+to+request+a+free+feasibility%2Fscope+review+for+the+Agent+Economic+Failure+Scan.%0A%0ACompany%2Fproject%3A%0ARepository+or+sandbox+link+%28no+secrets%29%3A%0AOne+execution+path+to+assess%3A%0AObserved+issue+or+concern%3A%0APreferred+contact+details%3A%0A%0APlease+confirm+whether+the+path+is+eligible%2C+the+exact+scope%2C+the+149+EUR+pilot+fee+and+any+applicable+taxes%2C+and+the+estimated+delivery+date+before+any+paid+work+begins.%0A%0AI+will+not+send+production+credentials%2C+private+keys%2C+or+real+funds.%0A"
-            target="_blank" rel="noopener noreferrer"
-            class="inline-flex items-center justify-center rounded-lg bg-aegis-cyan px-6 py-4 font-bold text-black hover:opacity-90 transition"
-          >
-            Request a free scope check via Gmail
-          </a>
-          <div class="text-sm text-slate-500">
-            First 3 eligible paid assessments · €149 pilot fee · 48h target*
-          </div>
-        </div>
-        <p class="mt-4 text-sm text-slate-400">
-          The button opens Gmail in a new tab (sign-in may be required). If you do not use Gmail, email
-          <span class="text-aegis-cyan break-all select-all">lortuarte765@gmail.com</span> from your preferred mail service.
-          Share a repository or sandbox link only — never credentials, private keys, or sensitive logs.
-        </p>
-        <p class="mt-2 text-xs text-slate-500">*Target delivery is measured after scope acceptance and receipt of agreed test materials; the date is confirmed before purchase.</p>
-      </div>
-    </section>
-
-    <section class="py-16 border-y border-white/10 bg-aegis-card/40">
-      <div class="max-w-5xl mx-auto px-5 grid md:grid-cols-2 gap-10">
-        <div>
-          <h2 class="text-3xl font-bold">What I test</h2>
-          <ul class="mt-6 space-y-4 text-slate-300">
-            <li><strong class="text-white">Retry after ambiguous outcome:</strong> did the effect succeed before the response was lost?</li>
-            <li><strong class="text-white">Concurrent duplicate intent:</strong> can two requests representing one logical action both pass?</li>
-            <li><strong class="text-white">Replay identity:</strong> does the same action retain the same logical identity across retries?</li>
-            <li><strong class="text-white">Budget / policy races:</strong> can concurrent requests consume the same remaining allowance?</li>
-            <li><strong class="text-white">Boundary placement:</strong> is enforcement authoritative before the irreversible effect?</li>
-          </ul>
-        </div>
-
-        <div>
-          <h2 class="text-3xl font-bold">What you receive</h2>
-          <ul class="mt-6 space-y-4 text-slate-300">
-            <li>1. Reproduction fixture when feasible, or a bounded inconclusive / no-finding result.</li>
-            <li>2. Documented execution boundary and observed behavior.</li>
-            <li>3. Available test evidence and observed duplicate-effect / budget behavior.</li>
-            <li>4. Claim limits: what the test proves and what it does not.</li>
-            <li>5. Focused recommendations and suggested verification steps, where applicable.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-16">
-      <div class="max-w-5xl mx-auto px-5">
-        <h2 class="text-3xl font-bold">Designed for consequential agent paths</h2>
-        <p class="mt-4 text-slate-400 max-w-3xl">
-          Best fit: AI agents that can trigger payments, wallet transfers, paid APIs, purchases, refunds, orders, trades, or other externally visible side effects where a retry or duplicate execution has economic cost.
-        </p>
-
-        <div class="mt-8 grid md:grid-cols-2 gap-6">
-          <div class="bg-aegis-card border border-white/10 rounded-xl p-6">
-            <h3 class="font-bold text-white">Needed</h3>
-            <p class="mt-3 text-slate-400 text-sm leading-relaxed">
-              A public repository, sandbox, minimal fixture, or authorized test path. Logs are optional if the behavior is reproducible without them.
-            </p>
-          </div>
-          <div class="bg-aegis-card border border-white/10 rounded-xl p-6">
-            <h3 class="font-bold text-white">Not needed</h3>
-            <p class="mt-3 text-slate-400 text-sm leading-relaxed">
-              Production credentials, private keys, real funds, destructive access, or permission to make broad infrastructure claims.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-16 border-y border-white/10 bg-black/20">
-      <div class="max-w-5xl mx-auto px-5">
-        <h2 class="text-3xl font-bold">Public engineering evidence</h2>
-
-        <div class="mt-5 rounded-xl border border-white/10 bg-aegis-card p-5 max-w-3xl">
-          <p class="text-slate-300">
-            <strong class="text-white">Performed by LortuArte</strong> — independent developer of AEGIS Core and contributor to Twigpine/zero.
-          </p>
-          <a
-            href="https://github.com/LortuArte"
-            target="_blank"
-            rel="noopener"
-            class="inline-block mt-2 text-aegis-cyan hover:underline"
-          >
-            View GitHub profile →
-          </a>
-        </div>
-
-        <p class="mt-6 text-slate-400 max-w-3xl">
-          Recent work includes a process-local per-model RPM admission-control contribution that passed the upstream project CI and was merged into Twigpine/zero. The Failure Scan is narrower: one economic execution path, one falsifiable question, one written evidence package.
-        </p>
-        <a class="inline-block mt-5 text-aegis-cyan hover:underline" href="https://github.com/Twigpine/zero/pull/1116" target="_blank" rel="noopener">
-          View upstream PR #1116 →
-        </a>
-      </div>
-    </section>
-
-    <section class="py-20">
-      <div class="max-w-5xl mx-auto px-5 text-center">
-        <div class="inline-flex px-3 py-1 rounded-full border border-aegis-cyan/30 bg-aegis-cyan/10 text-aegis-cyan text-xs font-bold tracking-widest uppercase">Founding pilot · first 3 assessments only</div>
-        <h2 class="mt-5 text-4xl font-extrabold">€149 pilot fee. One path. 48h target.</h2>
-        <p class="mt-5 text-slate-400 max-w-2xl mx-auto">
-          Start with a free eligibility check: email a public repository, sandbox, or minimal authorized test path. If the review is feasible, I will confirm in writing the scope, €149 pilot fee, any applicable taxes and payment terms, and delivery target before you decide. A diagnostic does not guarantee that a defect will be found.
-        </p>
-        <div class="mt-8">
-          <a
-            href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lortuarte765%40gmail.com&amp;su=AEGIS+Failure+Scan+%7C+Free+scope+review+request&amp;body=Hello+LortuArte%2C%0A%0AI+would+like+to+request+a+free+feasibility%2Fscope+review+for+the+Agent+Economic+Failure+Scan.%0A%0ACompany%2Fproject%3A%0ARepository+or+sandbox+link+%28no+secrets%29%3A%0AOne+execution+path+to+assess%3A%0AObserved+issue+or+concern%3A%0APreferred+contact+details%3A%0A%0APlease+confirm+whether+the+path+is+eligible%2C+the+exact+scope%2C+the+149+EUR+pilot+fee+and+any+applicable+taxes%2C+and+the+estimated+delivery+date+before+any+paid+work+begins.%0A%0AI+will+not+send+production+credentials%2C+private+keys%2C+or+real+funds.%0A"
-            target="_blank" rel="noopener noreferrer"
-            class="inline-flex items-center justify-center rounded-lg bg-aegis-cyan px-7 py-4 font-bold text-black hover:opacity-90 transition"
-          >
-            Request a free scope check via Gmail
-          </a>
-          <div class="mt-3 text-sm text-slate-500">First 3 eligible paid assessments · €149 pilot fee · 48h target*</div>
-          <p class="mt-3 text-sm text-slate-400">Or copy this address into your preferred email service: <span class="text-aegis-cyan break-all select-all">lortuarte765@gmail.com</span></p>
-        </div>
-
-        <p class="mt-8 text-xs text-slate-600">
-          This is a bounded engineering review, not certification, legal advice, a penetration test, or a guarantee of exactly-once external effects. Tests require explicit authorization and use only agreed non-production materials. No finding or vulnerability is guaranteed. *The delivery target starts when the scope and materials are accepted.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="border-t border-white/10 py-10 text-center text-sm text-slate-600">
-    AEGIS · Agent Economic Failure Scan
-  </footer>
-</body>
-</html>
+<body>
+<header class="top"><div class="wrap nav"><a href="/" class="brand">AEGIS <span>PROOF</span></a><nav class="navlinks" aria-label="Primary navigation"><a href="#deliverables">Deliverables</a><a href="#evidence">Evidence</a><a href="#faq">FAQ</a><a href="/">AEGIS Core</a></nav></div></header>
+<main>
+<div class="hero"><div class="wrap"><div class="kicker">Economic execution verification · Bounded B2B pilot</div><h1>Can your AI agent <em>execute or charge twice</em> after a lost response?</h1><p class="lead">Get reproducible evidence about <strong>one authorized payment, paid API, checkout or tool-execution path</strong>. We test a specific retry or concurrency question and report what happened, what it means and what remains unproven.</p><div class="btns"><a class="btn primary" href="mailto:lortuarte765@gmail.com?subject=AEGIS%20Proof%20-%20free%20scope%20check&amp;body=Hello%20AEGIS%20Proof%2C%0A%0ACompany%2Fproject%3A%0APublic%20documentation%20or%20sandbox%20link%20(no%20secrets)%3A%0AOne%20economic%20execution%20path%3A%0AConcern%20or%20observed%20behavior%3A%0A%0APlease%20confirm%20whether%20an%20authorized%20bounded%20assessment%20would%20be%20feasible.%0A">Request a free scope check →</a><a class="btn" href="sample-report.html">See a sample report</a></div><p class="small muted">Free eligibility enquiry. No payment, production credentials, private keys or personal data required. <a href="#contact">Other ways to contact</a>.</p><div class="metrics"><div class="metric"><strong>1 path</strong><span>One agreed technical question</span></div><div class="metric"><strong>€149</strong><span>Founding pilot; applicable taxes confirmed before engagement</span></div><div class="metric"><strong>48h*</strong><span>Target after accepted scope and complete test materials</span></div></div><p class="small muted" style="margin-top:16px">*Target delivery date agreed in writing. This page collects enquiries only; paid work begins solely after required formalities, scope and written authorization are completed.</p></div></div>
+<section id="deliverables"><div class="wrap"><div class="kicker">The deliverable</div><h2>You're buying an answer, not another SDK.</h2><p class="sectionlead">One falsifiable question, one bounded environment, a repeatable experiment and an honest result. No claim of a full security audit or guaranteed defect discovery.</p><div class="grid"><div class="card"><div class="stepnum">01 · Define</div><h3>Freeze the scope</h3><p>Agree the operation, test environment, expected behavior and precise failure condition before execution.</p></div><div class="card"><div class="stepnum">02 · Reproduce</div><h3>Record the evidence</h3><p>Run the authorized retry or concurrency scenario, documenting observations and reproduction instructions.</p></div><div class="card"><div class="stepnum">03 · Decide</div><h3>Deliver the finding</h3><p>Receive a PASS / FAIL / UNKNOWN verdict, explicit limitations and focused remediation recommendations.</p></div></div><div class="results"><div class="result"><b>PASS</b><p>The agreed criterion held under the tested conditions only.</p></div><div class="result"><b>FAIL</b><p>The test reproduced behavior contrary to the agreed criterion.</p></div><div class="result"><b>UNKNOWN</b><p>Available evidence was insufficient for a defensible verdict.</p></div></div></div></section>
+<section><div class="wrap"><div class="kicker">Example verification question</div><h2>What happens when payment succeeds, but the response disappears?</h2><div class="case"><div class="panel"><h3>Scenario</h3><ol><li>One agent initiates a paid API operation.</li><li>The first response is intentionally lost in the authorized test environment.</li><li>The agent retries the <em>same logical action</em>.</li><li>We measure execution and economic state at the agreed boundary.</li></ol></div><div class="panel"><h3>What we report</h3><ul><li>Attempt identity versus logical-action identity.</li><li>Number of executions and charges or simulated effects actually observed.</li><li>Whether the expected invariant held in the test.</li><li>Exactly which environments, failures and guarantees were <em>not</em> assessed.</li></ul></div></div><div class="tags"><span class="tag">Lost response</span><span class="tag">Idempotency</span><span class="tag">Concurrent retry</span><span class="tag">Payment → delivery</span></div><div class="bar"><strong>Boundary:</strong> the demo report is synthetic and illustrative. A customer-specific claim requires a separately authorized, executed and documented test.</div></div></section>
+<section id="evidence"><div class="wrap"><div class="kicker">Why trust the methodology</div><h2>Public engineering work, carefully scoped.</h2><div class="proof"><p>AEGIS Core is a published Python SDK with process-local pre-execution authorization mechanisms. Its current evidence <strong>does not establish distributed exactly-once effects, crash recovery or certification of live payment systems</strong>.</p><p>AEGIS developer LortuArte contributed process-local RPM admission controls merged upstream in <a href="https://github.com/Twigpine/zero/pull/1116" target="_blank" rel="noopener noreferrer">Twigpine/zero PR #1116</a>. That contribution does not mean Zero integrates AEGIS Core.</p><p><a href="https://github.com/LortuArte/aegis-sdk" target="_blank" rel="noopener noreferrer">Review the public AEGIS Core repository →</a></p></div></div></section>
+<section><div class="wrap"><div class="kicker">Eligibility</div><h2>Keep the pilot small, authorized and useful.</h2><div class="fit"><div><h3>Good fit</h3><ul><li>A developer or company operating consequential agent actions.</li><li>One precise problem in retries, payment/delivery or concurrency.</li><li>Local fixture, sandbox or testnet under your control.</li><li>Authority to approve the named test path.</li></ul></div><div><h3>Not included</h3><ul><li>Production penetration testing or destructive load testing.</li><li>Real-money transfer, custody or private-key access.</li><li>General security certification or guarantees of future behavior.</li><li>Code remediation, deployments or unrestricted architecture review.</li></ul></div></div></div></section>
+<section id="faq"><div class="wrap"><div class="kicker">Frequently asked</div><h2>Common questions</h2><div class="faq"><article><h3>What if you find no bug?</h3><p>You still receive the tested observations and a narrowly worded PASS or UNKNOWN as supported by the evidence. Finding a defect is not guaranteed.</p></article><article><h3>What exactly costs €149?</h3><p>One accepted founding-pilot assessment, not an unlimited audit. A written proposal confirms the exact scope, final tax treatment and payment terms before any paid work.</p></article><article><h3>Can you test production?</h3><p>Not under this founding pilot. Tests need explicit written authorization and non-production materials. No production secrets or real funds.</p></article><article><h3>Does the price include a fix?</h3><p>No. You get an evidence-based diagnosis and recommendations. Remediation would require a separate agreement.</p></article><article><h3>Will you publish our findings?</h3><p>No. Customer materials and results are confidential and are not published without a separate written authorization.</p></article><article><h3>What if my request isn't testable?</h3><p>The initial feasibility check is free. We will not accept a paid pilot until scope, inputs and authorization are sufficient for a meaningful assessment.</p></article></div></div></section>
+<section id="contact" class="end"><div class="wrap"><div class="kicker">Founding pilot · initial enquiries</div><h2>Start with one question about an economic action.</h2><p class="lead">Send your project, a public repository or non-sensitive sandbox description, and the exact retry or execution question. We will first determine whether the test is feasible.</p><div class="btns"><a class="btn primary" href="mailto:lortuarte765@gmail.com?subject=AEGIS%20Proof%20-%20free%20scope%20check&amp;body=Company%2Fproject%3A%0APublic%20repo%20or%20sandbox%20description%3A%0AOne%20execution%20path%3A%0ATechnical%20question%3A%0A">Email for a free scope check →</a><a class="btn" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lortuarte765%40gmail.com&amp;su=AEGIS%20Proof%20-%20free%20scope%20check" target="_blank" rel="noopener noreferrer">Open Gmail compose</a></div><p class="small">Or copy: <a href="mailto:lortuarte765@gmail.com">lortuarte765@gmail.com</a></p><p class="small muted">Please do not email secrets, wallet keys, credentials, financial account data, personal data or confidential logs during the initial enquiry. No checkout or binding purchase is offered on this page.</p></div></section>
+</main>
+<footer class="footer"><div class="wrap"><span>© 2026 AEGIS Proof · Reproducible economic execution verification</span><span><a href="/">AEGIS Core</a> · <a href="sample-report.html">Illustrative report</a> · <a href="mailto:lortuarte765@gmail.com">Contact</a></span></div></footer>
+</body></html>
