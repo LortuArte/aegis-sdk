@@ -19,7 +19,123 @@
 <div class="hero"><div class="wrap"><div class="kicker">Economic execution verification · Bounded B2B pilot</div><h1>Can your AI agent <em>execute or charge twice</em> after a lost response?</h1><p class="lead">Get reproducible evidence about <strong>one authorized payment, paid API, checkout or tool-execution path</strong>. We test a specific retry or concurrency question and report what happened, what it means and what remains unproven.</p><div class="btns"><a class="btn primary" href="mailto:lortuarte765@gmail.com?subject=AEGIS%20Proof%20-%20free%20scope%20check&amp;body=Hello%20AEGIS%20Proof%2C%0A%0ACompany%2Fproject%3A%0APublic%20documentation%20or%20sandbox%20link%20(no%20secrets)%3A%0AOne%20economic%20execution%20path%3A%0AConcern%20or%20observed%20behavior%3A%0A%0APlease%20confirm%20whether%20an%20authorized%20bounded%20assessment%20would%20be%20feasible.%0A">Request a free scope check →</a><a class="btn" href="sample-report.html">See a sample report</a></div><p class="small muted">Free eligibility enquiry. No payment, production credentials, private keys or personal data required. <a href="#contact">Other ways to contact</a>.</p><div class="metrics"><div class="metric"><strong>1 path</strong><span>One agreed technical question</span></div><div class="metric"><strong>€149</strong><span>Founding pilot; applicable taxes confirmed before engagement</span></div><div class="metric"><strong>48h*</strong><span>Target after accepted scope and complete test materials</span></div></div><p class="small muted" style="margin-top:16px">*Target delivery date agreed in writing. This page collects enquiries only; paid work begins solely after required formalities, scope and written authorization are completed.</p></div></div>
 <section id="deliverables"><div class="wrap"><div class="kicker">The deliverable</div><h2>You're buying an answer, not another SDK.</h2><p class="sectionlead">One falsifiable question, one bounded environment, a repeatable experiment and an honest result. No claim of a full security audit or guaranteed defect discovery.</p><div class="grid"><div class="card"><div class="stepnum">01 · Define</div><h3>Freeze the scope</h3><p>Agree the operation, test environment, expected behavior and precise failure condition before execution.</p></div><div class="card"><div class="stepnum">02 · Reproduce</div><h3>Record the evidence</h3><p>Run the authorized retry or concurrency scenario, documenting observations and reproduction instructions.</p></div><div class="card"><div class="stepnum">03 · Decide</div><h3>Deliver the finding</h3><p>Receive a PASS / FAIL / UNKNOWN verdict, explicit limitations and focused remediation recommendations.</p></div></div><div class="results"><div class="result"><b>PASS</b><p>The agreed criterion held under the tested conditions only.</p></div><div class="result"><b>FAIL</b><p>The test reproduced behavior contrary to the agreed criterion.</p></div><div class="result"><b>UNKNOWN</b><p>Available evidence was insufficient for a defensible verdict.</p></div></div></div></section>
 <section><div class="wrap"><div class="kicker">Example verification question</div><h2>What happens when payment succeeds, but the response disappears?</h2><div class="case"><div class="panel"><h3>Scenario</h3><ol><li>One agent initiates a paid API operation.</li><li>The first response is intentionally lost in the authorized test environment.</li><li>The agent retries the <em>same logical action</em>.</li><li>We measure execution and economic state at the agreed boundary.</li></ol></div><div class="panel"><h3>What we report</h3><ul><li>Attempt identity versus logical-action identity.</li><li>Number of executions and charges or simulated effects actually observed.</li><li>Whether the expected invariant held in the test.</li><li>Exactly which environments, failures and guarantees were <em>not</em> assessed.</li></ul></div></div><div class="tags"><span class="tag">Lost response</span><span class="tag">Idempotency</span><span class="tag">Concurrent retry</span><span class="tag">Payment → delivery</span></div><div class="bar"><strong>Boundary:</strong> the demo report is synthetic and illustrative. A customer-specific claim requires a separately authorized, executed and documented test.</div></div></section>
-<section id="evidence"><div class="wrap"><div class="kicker">Why trust the methodology</div><h2>Public engineering work, carefully scoped.</h2><div class="proof"><p>AEGIS Core is a published Python SDK with process-local pre-execution authorization mechanisms. Its current evidence <strong>does not establish distributed exactly-once effects, crash recovery or certification of live payment systems</strong>.</p><p>AEGIS developer LortuArte contributed process-local RPM admission controls merged upstream in <a href="https://github.com/Twigpine/zero/pull/1116" target="_blank" rel="noopener noreferrer">Twigpine/zero PR #1116</a>. That contribution does not mean Zero integrates AEGIS Core.</p><p><a href="https://github.com/LortuArte/aegis-sdk" target="_blank" rel="noopener noreferrer">Review the public AEGIS Core repository →</a></p></div></div></section>
+
+<section id="evidence">
+  <div class="wrap">
+    <div class="kicker">Public evidence &amp; engineering record</div>
+    <h2>Evidence you can inspect. Limits you can verify.</h2>
+    <p class="sectionlead">
+      Public records document bounded reproduction, external technical evaluation
+      and upstream engineering contributions. These are different evidence types:
+      none constitutes a general certification, production adoption or a guarantee
+      against duplicate external charges.
+    </p>
+
+    <div class="fit">
+      <div>
+        <h3>01 · AACP — External reproduction</h3>
+        <p>
+          An external operator reproduced a producer-authored AEGIS Core 3.4.0
+          single-process fixture: 100 presentations of one logical action,
+          one fresh execution grant, 99 cached replays and one simulated
+          downstream invocation.
+        </p>
+        <p class="small muted">
+          Classification: REPRODUCTION / BCR-1 at most.
+          No real funds, guaranteed simultaneous starts, independent
+          implementation or production certification. The public review-archive
+          download was pending in the last publication record checked.
+        </p>
+        <p>
+          <a href="https://github.com/darklordVirtual/agent-authority-conformance/issues/21"
+             target="_blank" rel="noopener noreferrer">
+            Review AACP Issue #21 →
+          </a>
+        </p>
+      </div>
+
+      <div>
+        <h3>02 · kube-coder — External technical evaluation</h3>
+        <p>
+          A project-side automated evaluator inspected AEGIS Core 3.4.0,
+          reviewed its source and reported local benchmarks.
+          It identified useful authorization and accounting patterns.
+        </p>
+        <p class="small muted">
+          The evaluator recommended against adopting AEGIS for kube-coder
+          Phase 4 because of architectural mismatches.
+          No integration, endorsement or production deployment is claimed.
+        </p>
+        <p>
+          <a href="https://github.com/imran31415/kube-coder/issues/573#issuecomment-5752986929"
+             target="_blank" rel="noopener noreferrer">
+            Read the evaluation →
+          </a>
+          ·
+          <a href="https://github.com/imran31415/kube-coder/issues/573#issuecomment-5753002672"
+             target="_blank" rel="noopener noreferrer">
+            Design notes →
+          </a>
+        </p>
+      </div>
+
+      <div>
+        <h3>03 · PayMCP — Paid-tool retry failure</h3>
+        <p>
+          PayMCP merged a fix for a paid-tool retry scenario in which a lost
+          response could cause a second underlying execution.
+          The upstream record credits Iraitz / LortuArte for reporting it.
+        </p>
+        <p class="small muted">
+          This documents an engineering problem and a reported contribution.
+          It does not establish that PayMCP uses or endorses AEGIS.
+        </p>
+        <p>
+          <a href="https://github.com/PayMCP/paymcp/pull/52"
+             target="_blank" rel="noopener noreferrer">
+            Review merged PR #52 →
+          </a>
+        </p>
+      </div>
+
+      <div>
+        <h3>04 · Zero — Merged engineering contribution</h3>
+        <p>
+          A process-local per-model RPM admission-control contribution
+          by LortuArte was merged into the upstream Zero project.
+          Its scope is request admission within a process.
+        </p>
+        <p class="small muted">
+          This is an upstream open-source contribution, not an AEGIS
+          integration, monetary budget system or production adoption.
+        </p>
+        <p>
+          <a href="https://github.com/Twigpine/zero/pull/1116"
+             target="_blank" rel="noopener noreferrer">
+            Review merged PR #1116 →
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <div class="bar" style="margin-top:25px">
+      <strong>Scope of evidence:</strong>
+      All claims apply only to the documented systems, fixtures and test
+      conditions. AEGIS Core's process-local authorization tests do not prove
+      distributed exactly-once execution, crash recovery or general security
+      certification. Customer-specific findings require separately authorized
+      tests.
+    </div>
+
+    <p style="margin-top:22px">
+      <a href="https://github.com/LortuArte/aegis-sdk"
+         target="_blank" rel="noopener noreferrer">
+        Review AEGIS Core source code and reproducible tests →
+      </a>
+    </p>
+  </div>
+</section>
+
 <section><div class="wrap"><div class="kicker">Eligibility</div><h2>Keep the pilot small, authorized and useful.</h2><div class="fit"><div><h3>Good fit</h3><ul><li>A developer or company operating consequential agent actions.</li><li>One precise problem in retries, payment/delivery or concurrency.</li><li>Local fixture, sandbox or testnet under your control.</li><li>Authority to approve the named test path.</li></ul></div><div><h3>Not included</h3><ul><li>Production penetration testing or destructive load testing.</li><li>Real-money transfer, custody or private-key access.</li><li>General security certification or guarantees of future behavior.</li><li>Code remediation, deployments or unrestricted architecture review.</li></ul></div></div></div></section>
 <section id="faq"><div class="wrap"><div class="kicker">Frequently asked</div><h2>Common questions</h2><div class="faq"><article><h3>What if you find no bug?</h3><p>You still receive the tested observations and a narrowly worded PASS or UNKNOWN as supported by the evidence. Finding a defect is not guaranteed.</p></article><article><h3>What exactly costs €149?</h3><p>One accepted founding-pilot assessment, not an unlimited audit. A written proposal confirms the exact scope, final tax treatment and payment terms before any paid work.</p></article><article><h3>Can you test production?</h3><p>Not under this founding pilot. Tests need explicit written authorization and non-production materials. No production secrets or real funds.</p></article><article><h3>Does the price include a fix?</h3><p>No. You get an evidence-based diagnosis and recommendations. Remediation would require a separate agreement.</p></article><article><h3>Will you publish our findings?</h3><p>No. Customer materials and results are confidential and are not published without a separate written authorization.</p></article><article><h3>What if my request isn't testable?</h3><p>The initial feasibility check is free. We will not accept a paid pilot until scope, inputs and authorization are sufficient for a meaningful assessment.</p></article></div></div></section>
 <section id="contact" class="end"><div class="wrap"><div class="kicker">Founding pilot · initial enquiries</div><h2>Start with one question about an economic action.</h2><p class="lead">Send your project, a public repository or non-sensitive sandbox description, and the exact retry or execution question. We will first determine whether the test is feasible.</p><div class="btns"><a class="btn primary" href="mailto:lortuarte765@gmail.com?subject=AEGIS%20Proof%20-%20free%20scope%20check&amp;body=Company%2Fproject%3A%0APublic%20repo%20or%20sandbox%20description%3A%0AOne%20execution%20path%3A%0ATechnical%20question%3A%0A">Email for a free scope check →</a><a class="btn" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lortuarte765%40gmail.com&amp;su=AEGIS%20Proof%20-%20free%20scope%20check" target="_blank" rel="noopener noreferrer">Open Gmail compose</a></div><p class="small">Or copy: <a href="mailto:lortuarte765@gmail.com">lortuarte765@gmail.com</a></p><p class="small muted">Please do not email secrets, wallet keys, credentials, financial account data, personal data or confidential logs during the initial enquiry. No checkout or binding purchase is offered on this page.</p></div></section>
